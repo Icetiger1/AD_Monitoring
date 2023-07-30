@@ -86,8 +86,15 @@ namespace AD_Monitoring
                     cp.Location = (string)ent.Properties["location"].Value;
                     cp.OS = (string)ent.Properties["operatingSystem"].Value;
                     cp.Company = (string)ent.Properties["company"].Value;
-                    lv.Items.Add(new ListViewItem(new String[] { cp.Name, cp.Description, cp.Location, cp.OS, cp.Company, " ", " " }));
-                    lv.Items[lv.Items.Count - 1].ImageIndex = 4;
+                    ListViewItem item1 = new ListViewItem(cp.Name);
+                    item1.SubItems.Add(cp.Description);
+                    item1.SubItems.Add(cp.Location);
+                    item1.SubItems.Add(cp.OS);
+                    item1.SubItems.Add(cp.Company);
+                    item1.SubItems.Add(" ");
+                    item1.SubItems.Add(" ");
+                    item1.ImageIndex = 4;
+                    lv.Items.AddRange(new ListViewItem[] { item1 });
                 }
                 mySearcher.Dispose();
                 searcher.Dispose();

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Management;
 using System.DirectoryServices;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -41,13 +42,12 @@ namespace AD_Monitoring
             ProcessStartInfo startInfo = new ProcessStartInfo();
             Process myprocess = new Process();
             string path = Application.StartupPath;
-            myprocess.StartInfo.WorkingDirectory = path + "\\ConfMgr 2012 Remote Tools";
-            myprocess.StartInfo.FileName = ("CmRcViewer.exe");
+            myprocess.StartInfo.FileName = path + @"\ConfMgr 2012 Remote Tools\CmRcViewer.exe";
             myprocess.StartInfo.Arguments = (cn);
             myprocess.Start();
             myprocess.Close();
-        }
-        public static string PSLogin(string cn, RichTextBox rich)
+        } //не работает
+        public static string PSLogin(string cn)
         {
             Cursor.Current = Cursors.WaitCursor;
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -70,7 +70,6 @@ namespace AD_Monitoring
                 string[] mass1 = output.Split('R');
                 string text = mass1[1];
                 us = text.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                rich.Text += us + Environment.NewLine;
                 myprocess.WaitForExit();
                 myprocess.Close();
                 Cursor.Current = Cursors.Default;
@@ -89,35 +88,35 @@ namespace AD_Monitoring
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             Process myprocess = new Process();
-            myprocess.StartInfo.FileName = @"\\" + cn + "\\c$";
+            myprocess.StartInfo.FileName = "explorer.exe";
+            myprocess.StartInfo.Arguments = @"\\" + cn + "\\c$";
             myprocess.Start();
             myprocess.Close();
-        }
+        } 
         public static void Share_Folders(string cn)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             Process myprocess = new Process();
-            myprocess.StartInfo.FileName = @"\\" + cn + "\\";
+            myprocess.StartInfo.FileName = "explorer.exe";
+            myprocess.StartInfo.Arguments = @"\\" + cn + "\\";
             myprocess.Start();
-            myprocess.WaitForExit();
             myprocess.Close();
-        }
+        } 
         public static void ShutDown(string cn, string key, RichTextBox rich)
         {
             Cursor.Current = Cursors.WaitCursor;
             Process myprocess = new Process();
-            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\sysnative";
-            myprocess.StartInfo.WorkingDirectory = filepath;
-            myprocess.StartInfo.FileName = filepath + "\\shutdown";
-            myprocess.StartInfo.Arguments = @"/m \\" + cn + key;
-            myprocess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
             myprocess.StartInfo.CreateNoWindow = true;
+            myprocess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            myprocess.StartInfo.UseShellExecute = true;
+            myprocess.StartInfo.Verb = "runas";
+            myprocess.StartInfo.FileName = @"C:\Windows\System32\cmd.exe";
+            myprocess.StartInfo.Arguments = @"/k shutdown /m \\" + cn + key;
             myprocess.Start();
-
-            myprocess.WaitForExit();
             myprocess.Close();
             Cursor.Current = Cursors.Default;
-        }
+        } 
         public static string Ping(string cn)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -140,12 +139,10 @@ namespace AD_Monitoring
                         if (reply.Status == IPStatus.Success || reply.Status == IPStatus.TtlExpired)
                         {
                             scanInfo.IP= reply.Address.ToString();
-                            break;
                         }
                         if (reply.Status != IPStatus.TtlExpired && reply.Status != IPStatus.TimedOut)
                         {
                             scanInfo.IP = reply.Address.ToString();
-                            break;
                         }
                         else
                         {
@@ -164,83 +161,84 @@ namespace AD_Monitoring
             }
             Cursor.Current = Cursors.Default;
         }
-        public static void Printers(string cn)
-        {
-        //    Cursor.Current = Cursors.WaitCursor;
-        //    try
-        //    {
-        //        ManagementScope scope = new ManagementScope(@"\\" + cn + @"\root\cimv2");
-        //        scope.Connect();
-        //        try
-        //        {
-        //            if (scope.IsConnected)
-        //            {
-        //                ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\" + cn + @"\root\cimv2", "SELECT * From Win32_Printer");
-        //                foreach (ManagementObject obj in searcher.Get())
-        //                {
-        //                    richTextBox1.Text += obj["Name"].ToString() + Environment.NewLine;
-        //                }
-        //            }
-        //        }
-        //        catch
-        //        {
-
-        //        }
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //    Cursor.Current = Cursors.Default;
-        }
-        public static void LocalAdmin(string cn, RichTextBox rich)
+        public static void Printers(string cn, RichTextBox rich)
         {
             Cursor.Current = Cursors.WaitCursor;
-            using (DirectoryEntry machine = new DirectoryEntry("WinNT://" + cn))
+            try
             {
-                using (DirectoryEntry group = machine.Children.Find("Администраторы", "Group"))
+                ManagementScope scope = new ManagementScope(@"\\" + cn + @"\root\cimv2");
+                scope.Connect();
+                rich.Text += "Принтеры " + cn + ":" + Environment.NewLine;
+                if (scope.IsConnected)
                 {
-                    object members = group.Invoke("Members", null);
-                    rich.Text += "Локальные администраторы " + cn + Environment.NewLine;
-                    foreach (object member in (IEnumerable)members)
+                    ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\" + cn + @"\root\cimv2", "SELECT * From Win32_Printer");
+                    foreach (ManagementObject obj in searcher.Get())
                     {
-                        string acc = new DirectoryEntry(member).Name;
-                        var res = new string[2];
-                        res[0] = cn;
-                        res[1] = acc;
-                        rich.Text += res[1] + Environment.NewLine;
+                        rich.Text += obj["Name"].ToString() + Environment.NewLine;
                     }
                 }
-                using (DirectoryEntry group = machine.Children.Find("Administrators", "Group"))
+                else
                 {
-                    object members = group.Invoke("Members", null);
-                    rich.Text += "Локальные администраторы " + cn + Environment.NewLine;
-                    foreach (object member in (IEnumerable)members)
+                    rich.Text += "Нет данных" + Environment.NewLine;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            Cursor.Current = Cursors.Default;
+        } 
+        public static void LocalAdmin(string cn, RichTextBox rich)
+        {
+            using (DirectoryEntry machine = new DirectoryEntry("WinNT://" + cn))
+            {
+                try
+                {
+                    using (DirectoryEntry group = machine.Children.Find("Администраторы", "Group"))
                     {
-                        string acc = new DirectoryEntry(member).Name;
-                        var res = new string[2];
-                        res[0] = cn;
-                        res[1] = acc;
-                        rich.Text += res[1] + Environment.NewLine;
+                        object members = group.Invoke("Members", null);
+                        rich.Text += "Локальные администраторы " + cn + Environment.NewLine;
+                        foreach (object member in (IEnumerable)members)
+                        {
+                            string acc = new DirectoryEntry(member).Name;
+                            var res = new string[2];
+                            res[0] = cn;
+                            res[1] = acc;
+                            rich.Text += res[1] + Environment.NewLine;
+                        }
+                    }
+                }
+                catch
+                {
+                    using (DirectoryEntry group = machine.Children.Find("Administrators", "Group"))
+                    {
+                        object members = group.Invoke("Members", null);
+                        rich.Text += "Локальные администраторы " + cn + Environment.NewLine;
+                        foreach (object member in (IEnumerable)members)
+                        {
+                            string acc = new DirectoryEntry(member).Name;
+                            var res = new string[2];
+                            res[0] = cn;
+                            res[1] = acc;
+                            rich.Text += res[1] + Environment.NewLine;
+                        }
                     }
                 }
             }
-            Cursor.Current = Cursors.Default;
         }
         public static void Send_msg(string address, string text)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
 
-            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\sysnative";
+            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\System32\";
             startInfo.WorkingDirectory = filepath;
-            startInfo.FileName = filepath + "\\msg.exe";
+            startInfo.FileName = filepath + @"\msg.exe";
             startInfo.UseShellExecute = true;
             startInfo.Arguments = "* /Server:" + address + " " + text;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
             Process myprocess = Process.Start(startInfo);
             myprocess.WaitForExit();
             myprocess.Close();
-        }
+        }  
     }
 }

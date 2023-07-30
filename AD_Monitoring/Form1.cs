@@ -1,3 +1,5 @@
+using OfficeOpenXml;
+using System.Diagnostics;
 using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.Net.NetworkInformation;
@@ -29,12 +31,10 @@ namespace AD_Monitoring
             }
         }
 
+       //сортировка listView1
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            // Установка свойства ListViewItemSorter на новый объект
-            // ListViewItemComparer.
             this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
-            // Вызов метода сортировки для ручной сортировки.
             listView1.Sort();
         }
 
@@ -45,7 +45,8 @@ namespace AD_Monitoring
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (treeView1.SelectedNode.Nodes == null)
+
+            if (treeView1.SelectedNode.Nodes.Count == 0)
             {
                 listView1.Items.Clear();
 
@@ -60,6 +61,11 @@ namespace AD_Monitoring
                     MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                treeView1.SelectedNode.Expand();
+            }
+            
 
         }
 
@@ -76,9 +82,9 @@ namespace AD_Monitoring
                         {
                             Modes.Open_disk(comp_name);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Access denied!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -148,7 +154,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            scanInfo.Login = Modes.PSLogin(comp_name, richTextBox1);
+                            scanInfo.Login = Modes.PSLogin(comp_name);
                             if (scanInfo.Login != null)
                             {
                                 listView1.Items[i].SubItems[6].Text = scanInfo.Login;
@@ -170,6 +176,7 @@ namespace AD_Monitoring
                     }
                 }
             }
+            Cursor.Current = Cursors.Default;
         }
 
         private void shareFolderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -263,8 +270,18 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            listView1.Items[i].SubItems[5].Text = Modes.Ping(comp_name);
-                            listView1.Items[i].ImageIndex = 3;
+                            string ip = Modes.Ping(comp_name);
+                            if (ip != null)
+                            {
+                                listView1.Items[i].SubItems[5].Text = ip;
+                                listView1.Items[i].ImageIndex = 3;
+                            }
+                            else
+                            {
+
+                                listView1.Items[i].SubItems[5].Text = " ";
+                                listView1.Items[i].ImageIndex = 4;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -290,8 +307,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            richTextBox1.Text += "Принтеры " + comp_name + ":" + Environment.NewLine;
-                            Modes.Printers(comp_name);
+                            Modes.Printers(comp_name, richTextBox1);
                         }
                         catch (Exception ex)
                         {
@@ -351,47 +367,68 @@ namespace AD_Monitoring
             }
         }
 
-        private async void toolStripButton1_Click(object sender, EventArgs e)
+        private async void ScanButton1_Click(object sender, EventArgs e)
         {
-            if (listView1.Items.Count != null)
+            if (listView1.Items != null || listView1.Items.Count != 0)
             {
+                treeView1.Enabled = false;
+                toolStripButton1.Enabled = false;
                 string start = "Начало выполнения сканирования - " + DateTime.Now;
                 richTextBox1.Text += start + Environment.NewLine;
                 listView1.ColumnClick -= listView1_ColumnClick;
                 listView1.ColumnClick += new ColumnClickEventHandler(listView2_delete_ColumnClick);
-                int b = listView1.Items.Count;
-                var tasks = new List<Task>();
-                for (int i = 0; i < b; i++)
-                {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
-                    tasks.Add(Task.Run(() => AsyncGetIP(comp_name, b)));
-                }
-                await Task.WhenAll(tasks);
-                string end = "Конец выполнения сканирования - " + DateTime.Now;
-                richTextBox1.Text += end + Environment.NewLine;
-                listView1.ColumnClick -= listView2_delete_ColumnClick;
-                listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
+                Zapolnyaem_ip_login();
             }
         }
+        private async void Zapolnyaem_ip_login()
+        {
+            int b = listView1.Items.Count;
+            var tasks = new List<Task>();
+            var tasks2 = new List<Task>();
+            for (int i = 0; i < b; i++)
+            {
+                string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                tasks.Add(Task.Run(() => AsyncGetIP(comp_name, b)));
+                tasks2.Add(Task.Run(() => AsyncLogin_new(comp_name, b)));
+            }
+            await Task.WhenAll(tasks);
+            string end = "Конец выполнения сканирования - " + DateTime.Now;
+            richTextBox1.Text += end + Environment.NewLine;
+            listView1.ColumnClick -= listView2_delete_ColumnClick;
+            listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
+            toolStripButton1.Enabled = true;
+            treeView1.Enabled = true;
+        }
+
         private async Task AsyncGetIP(string cn, int count)
         {
-            string result = default;
-            result = await Task.Run(() => Modes.Ping(cn));
-
-            if (result!= null)
+            string? result_ip = null;
+            string? result_user = null;
+            result_ip = await Task.Run(() => Modes.Ping(cn));
+            if (result_ip != null)
             {
+                result_user = await Task.Run(() => Modes.PSLogin(cn));
                 for (int j = 0; j < count; j++)
                 {
                     this.Invoke(new Action(() =>
                     {
                         if (listView1.Items[j].SubItems[0].Text.Contains(cn))
                         {
-                            listView1.Items[j].ImageIndex = 4;
+                            listView1.Items[j].ImageIndex = 3;
                             listView1.RedrawItems(j, j, true);
-                            listView1.Items[j].SubItems[5].Text = result;
+                            listView1.Items[j].SubItems[5].Text = result_ip;
+                            if (result_user != null)
+                            {
+                                listView1.Items[j].SubItems[6].Text = result_user;
+                            }
+                            else
+                            {
+                                listView1.Items[j].SubItems[6].Text = " ";
+                            }
                         }
                     }));
                 }
+               
             }
             else
             {
@@ -401,14 +438,18 @@ namespace AD_Monitoring
                     {
                         if (listView1.Items[j].SubItems[0].Text.Contains(cn))
                         {
-                            result = "";
-                            listView1.Items[j].SubItems[5].Text = result;
-                            listView1.Items[j].ImageIndex = 3;
+                            result_ip = "";
+                            listView1.Items[j].SubItems[5].Text = result_ip;
+                            listView1.Items[j].ImageIndex = 4;
                             listView1.RedrawItems(j, j, false);
                         }
                     }));
                 }
             }
+        }
+        private async Task AsyncLogin_new(string cn, int count)
+        {
+
         }
 
         private void sCCMConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -435,6 +476,43 @@ namespace AD_Monitoring
                     }
                 }
             }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (listView1.Items != null || listView1.Items.Count != 0)
+            {
+                string ou = treeView1.SelectedNode.Text + "_" + treeView1.SelectedNode.Parent.Text;
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                string path = @"Reports\";
+                string filename = "Report_" + DateTime.UtcNow.Date.ToString("d") +"_" + DateTime.UtcNow.ToString("t") + "_" + ou +".xlsx";
+                using (var package = new ExcelPackage(new FileInfo(path + filename)))
+                {
+                    var sheet = package.Workbook.Worksheets.Add("sheet");
+                    int b = listView1.Columns.Count;
+                    for (int i=0; i < b; i++)
+                    {
+                        sheet.Cells[1, i + 1].Value = listView1.Columns[i].Text;
+                    }
+                    int i1 = 1;
+                    int i2 = 2;
+                    foreach(ListViewItem lv in listView1.Items)
+                    {
+                        i1 = 1;
+                        foreach (ListViewItem.ListViewSubItem lvs in lv.SubItems)
+                        {
+                            sheet.Cells[i2, i1].Value = lvs.Text;
+                            i1++;
+                        }
+                        i2++;
+                    }
+                    sheet.Cells.AutoFitColumns();
+                    //package.Save();
+                    package.V
+                }
+                //Process.Start(Application.StartupPath + path + filename);
+            }
+
         }
     }
 }
