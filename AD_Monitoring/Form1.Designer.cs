@@ -52,21 +52,20 @@
             printersToolStripMenuItem = new ToolStripMenuItem();
             localAdminToolStripMenuItem = new ToolStripMenuItem();
             sentMessageToolStripMenuItem = new ToolStripMenuItem();
-            imageList1 = new ImageList(components);
             toolStripButton3 = new ToolStripSplitButton();
+            imageList1 = new ImageList(components);
             toolStrip1 = new ToolStrip();
             toolStripSeparator4 = new ToolStripSeparator();
             toolStripButton2 = new ToolStripButton();
+            toolStripButton5 = new ToolStripButton();
+            toolStripButton6 = new ToolStripButton();
+            toolStripButton4 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             toolStripButton1 = new ToolStripButton();
             richTextBox1 = new RichTextBox();
             label1 = new Label();
             treeView1 = new TreeView();
             label2 = new Label();
-            toolStripButton4 = new ToolStripButton();
-            toolStripSeparator5 = new ToolStripSeparator();
-            toolStripButton5 = new ToolStripButton();
-            toolStripButton6 = new ToolStripButton();
             contextMenuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -131,7 +130,7 @@
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { remoteControlToolStripMenuItem, computerManagementToolStripMenuItem, sCCMConnectionToolStripMenuItem, whoOnlineToolStripMenuItem, discCToolStripMenuItem, shareFolderToolStripMenuItem, powerManagementToolStripMenuItem, pingToolStripMenuItem, printersToolStripMenuItem, localAdminToolStripMenuItem, sentMessageToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.OwnerItem = toolStripButton3;
-            contextMenuStrip1.Size = new Size(203, 246);
+            contextMenuStrip1.Size = new Size(203, 268);
             // 
             // remoteControlToolStripMenuItem
             // 
@@ -231,19 +230,8 @@
             sentMessageToolStripMenuItem.Image = Properties.Resources.student_work_office_desk_work_space_computer_working_support_icon_191191;
             sentMessageToolStripMenuItem.Name = "sentMessageToolStripMenuItem";
             sentMessageToolStripMenuItem.Size = new Size(202, 22);
-            sentMessageToolStripMenuItem.Text = "Sent message";
+            sentMessageToolStripMenuItem.Text = "Send message";
             sentMessageToolStripMenuItem.Click += sentMessageToolStripMenuItem_Click;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth8Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "folderorangecd_93301.png");
-            imageList1.Images.SetKeyName(1, "folderorangewifi_93453.png");
-            imageList1.Images.SetKeyName(2, "folderyellow_92963.png");
-            imageList1.Images.SetKeyName(3, "like-icon_31852.png");
-            imageList1.Images.SetKeyName(4, "dislike-icon_31856.png");
             // 
             // toolStripButton3
             // 
@@ -256,11 +244,22 @@
             toolStripButton3.Text = "Modes";
             toolStripButton3.ToolTipText = "Modes";
             // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "folderorangecd_93301.png");
+            imageList1.Images.SetKeyName(1, "folderorangewifi_93453.png");
+            imageList1.Images.SetKeyName(2, "folderyellow_92963.png");
+            imageList1.Images.SetKeyName(3, "like-icon_31852.png");
+            imageList1.Images.SetKeyName(4, "dislike-icon_31856.png");
+            // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.White;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripButton2, toolStripSeparator5, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripButton2, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1145, 59);
@@ -284,6 +283,33 @@
             toolStripButton2.Size = new Size(56, 56);
             toolStripButton2.Text = "Excel";
             toolStripButton2.Click += toolStripButton2_Click;
+            // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton5.Enabled = false;
+            toolStripButton5.ImageTransparentColor = Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new Size(23, 56);
+            toolStripButton5.Text = "toolStripButton5";
+            // 
+            // toolStripButton6
+            // 
+            toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton6.Enabled = false;
+            toolStripButton6.ImageTransparentColor = Color.Magenta;
+            toolStripButton6.Name = "toolStripButton6";
+            toolStripButton6.Size = new Size(23, 56);
+            toolStripButton6.Text = "toolStripButton6";
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton4.Enabled = false;
+            toolStripButton4.ImageTransparentColor = Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new Size(23, 56);
+            toolStripButton4.Text = "toolStripButton4";
             // 
             // toolStripSeparator3
             // 
@@ -342,38 +368,6 @@
             label2.Text = "label2";
             label2.TextAlign = ContentAlignment.TopRight;
             // 
-            // toolStripButton4
-            // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Enabled = false;
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(23, 56);
-            toolStripButton4.Text = "toolStripButton4";
-            // 
-            // toolStripSeparator5
-            // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(6, 59);
-            // 
-            // toolStripButton5
-            // 
-            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Enabled = false;
-            toolStripButton5.ImageTransparentColor = Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new Size(23, 56);
-            toolStripButton5.Text = "toolStripButton5";
-            // 
-            // toolStripButton6
-            // 
-            toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton6.Enabled = false;
-            toolStripButton6.ImageTransparentColor = Color.Magenta;
-            toolStripButton6.Name = "toolStripButton6";
-            toolStripButton6.Size = new Size(23, 56);
-            toolStripButton6.Text = "toolStripButton6";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -430,7 +424,6 @@
         private ToolStripMenuItem whoOnlineToolStripMenuItem;
         private ToolStripButton toolStripButton1;
         public ContextMenuStrip contextMenuStrip1;
-        private ToolStripSeparator toolStripSeparator5;
         private ToolStripButton toolStripButton5;
         private ToolStripButton toolStripButton6;
         private ToolStripButton toolStripButton4;

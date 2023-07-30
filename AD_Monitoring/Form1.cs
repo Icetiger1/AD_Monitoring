@@ -27,11 +27,11 @@ namespace AD_Monitoring
             {
                 label1.Text = "Domain is unavailable";
                 label1.ForeColor = Color.RosyBrown;
-                MessageBox.Show("Could not get information about the domain of the computer. \\" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not get information about the domain of the computer. " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //сортировка listView1
+        //sorting listView1
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
@@ -40,7 +40,7 @@ namespace AD_Monitoring
 
         private void listView2_delete_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-
+            //fake method
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -58,7 +58,7 @@ namespace AD_Monitoring
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -84,7 +84,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -110,7 +110,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -166,7 +166,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             listView1.Items[i].SubItems[6].Text = "Нет данных";
                         }
                     }
@@ -194,7 +194,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -221,7 +221,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -248,7 +248,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -285,7 +285,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -311,7 +311,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -338,7 +338,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -367,19 +367,24 @@ namespace AD_Monitoring
             }
         }
 
-        private async void ScanButton1_Click(object sender, EventArgs e)
+        private void ScanButton1_Click(object sender, EventArgs e)
         {
-            if (listView1.Items != null || listView1.Items.Count != 0)
+            if (listView1.Items.Count != 0)
             {
                 treeView1.Enabled = false;
                 toolStripButton1.Enabled = false;
-                string start = "Начало выполнения сканирования - " + DateTime.Now;
+                string start = "Start of the scan - " + DateTime.Now;
                 richTextBox1.Text += start + Environment.NewLine;
                 listView1.ColumnClick -= listView1_ColumnClick;
                 listView1.ColumnClick += new ColumnClickEventHandler(listView2_delete_ColumnClick);
                 Zapolnyaem_ip_login();
             }
+            else
+            {
+                richTextBox1.Text += "There is no data for scanning. Select an item in the treeview to display the data." + Environment.NewLine;
+            }
         }
+
         private async void Zapolnyaem_ip_login()
         {
             int b = listView1.Items.Count;
@@ -389,10 +394,9 @@ namespace AD_Monitoring
             {
                 string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
                 tasks.Add(Task.Run(() => AsyncGetIP(comp_name, b)));
-                tasks2.Add(Task.Run(() => AsyncLogin_new(comp_name, b)));
             }
             await Task.WhenAll(tasks);
-            string end = "Конец выполнения сканирования - " + DateTime.Now;
+            string end = "End of scan execution - " + DateTime.Now;
             richTextBox1.Text += end + Environment.NewLine;
             listView1.ColumnClick -= listView2_delete_ColumnClick;
             listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
@@ -447,10 +451,6 @@ namespace AD_Monitoring
                 }
             }
         }
-        private async Task AsyncLogin_new(string cn, int count)
-        {
-
-        }
 
         private void sCCMConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -467,7 +467,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -480,36 +480,43 @@ namespace AD_Monitoring
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if (listView1.Items != null || listView1.Items.Count != 0)
+            //Export to excel information from listView1
+            if (listView1.Items.Count != 0)
             {
-                string ou = treeView1.SelectedNode.Text + "_" + treeView1.SelectedNode.Parent.Text;
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                string path = @"Reports\";
-                string filename = "Report_" + DateTime.UtcNow.Date.ToString("d") + "_" + DateTime.UtcNow.ToString("t") + "_" + ou + ".xlsx";
-                using (var package = new ExcelPackage(new FileInfo(path + filename)))
+                try
                 {
-                    var sheet = package.Workbook.Worksheets.Add("sheet");
-                    int b = listView1.Columns.Count;
-                    for (int i = 0; i < b; i++)
+                    string ou = treeView1.SelectedNode.Text + "_" + treeView1.SelectedNode.Parent.Text;
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                    string path = @"Reports\";
+                    string filename = "Report_" + DateTime.UtcNow.Date.ToString("d") + "_" + DateTime.UtcNow.ToString("t") + "_" + ou + ".xlsx";
+                    using (var package = new ExcelPackage(new FileInfo(path + filename)))
                     {
-                        sheet.Cells[1, i + 1].Value = listView1.Columns[i].Text;
-                    }
-                    int i1 = 1;
-                    int i2 = 2;
-                    foreach (ListViewItem lv in listView1.Items)
-                    {
-                        i1 = 1;
-                        foreach (ListViewItem.ListViewSubItem lvs in lv.SubItems)
+                        var sheet = package.Workbook.Worksheets.Add("sheet");
+                        int b = listView1.Columns.Count;
+                        for (int i = 0; i < b; i++)
                         {
-                            sheet.Cells[i2, i1].Value = lvs.Text;
-                            i1++;
+                            sheet.Cells[1, i + 1].Value = listView1.Columns[i].Text;
                         }
-                        i2++;
+                        int i1 = 1;
+                        int i2 = 2;
+                        foreach (ListViewItem lv in listView1.Items)
+                        {
+                            i1 = 1;
+                            foreach (ListViewItem.ListViewSubItem lvs in lv.SubItems)
+                            {
+                                sheet.Cells[i2, i1].Value = lvs.Text;
+                                i1++;
+                            }
+                            i2++;
+                        }
+                        sheet.Cells.AutoFitColumns();
+                        package.Save();
                     }
-                    sheet.Cells.AutoFitColumns();
-                    //package.Save();
                 }
-                //Process.Start(Application.StartupPath + path + filename);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
         }
