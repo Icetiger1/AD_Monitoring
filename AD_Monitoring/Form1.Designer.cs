@@ -28,408 +28,378 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.ColumnHeader = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.remoteControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.computerManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sCCMConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.whoOnlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shareFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.powerManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shutdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rebootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sentMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripSplitButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.reportOnSharedNetworkResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportOnLocalAdminsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            listView1 = new ListView();
+            ColumnHeader = new ColumnHeader();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader6 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            remoteControlToolStripMenuItem = new ToolStripMenuItem();
+            computerManagementToolStripMenuItem = new ToolStripMenuItem();
+            sCCMConnectionToolStripMenuItem = new ToolStripMenuItem();
+            whoOnlineToolStripMenuItem = new ToolStripMenuItem();
+            discCToolStripMenuItem = new ToolStripMenuItem();
+            shareFolderToolStripMenuItem = new ToolStripMenuItem();
+            powerManagementToolStripMenuItem = new ToolStripMenuItem();
+            shutdownToolStripMenuItem = new ToolStripMenuItem();
+            rebootToolStripMenuItem = new ToolStripMenuItem();
+            pingToolStripMenuItem = new ToolStripMenuItem();
+            printersToolStripMenuItem = new ToolStripMenuItem();
+            localAdminToolStripMenuItem = new ToolStripMenuItem();
+            sentMessageToolStripMenuItem = new ToolStripMenuItem();
+            imageList1 = new ImageList(components);
+            toolStripButton3 = new ToolStripSplitButton();
+            toolStrip1 = new ToolStrip();
+            toolStripSeparator4 = new ToolStripSeparator();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripButton2 = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            toolStripButton1 = new ToolStripButton();
+            richTextBox1 = new RichTextBox();
+            label1 = new Label();
+            treeView1 = new TreeView();
+            label2 = new Label();
+            toolStripButton4 = new ToolStripButton();
+            toolStripSeparator5 = new ToolStripSeparator();
+            toolStripButton5 = new ToolStripButton();
+            toolStripButton6 = new ToolStripButton();
+            contextMenuStrip1.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // listView1
             // 
-            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.listView1.AllowColumnReorder = true;
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColumnHeader,
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader6,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(219, 62);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(914, 517);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            listView1.Activation = ItemActivation.OneClick;
+            listView1.Alignment = ListViewAlignment.SnapToGrid;
+            listView1.AllowColumnReorder = true;
+            listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listView1.Columns.AddRange(new ColumnHeader[] { ColumnHeader, columnHeader1, columnHeader2, columnHeader3, columnHeader6, columnHeader4, columnHeader5 });
+            listView1.ContextMenuStrip = contextMenuStrip1;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+            listView1.LargeImageList = imageList1;
+            listView1.Location = new Point(219, 62);
+            listView1.MultiSelect = false;
+            listView1.Name = "listView1";
+            listView1.Size = new Size(914, 517);
+            listView1.SmallImageList = imageList1;
+            listView1.TabIndex = 0;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
             // 
             // ColumnHeader
             // 
-            this.ColumnHeader.Text = "Name";
-            this.ColumnHeader.Width = 120;
+            ColumnHeader.Text = "Name";
+            ColumnHeader.Width = 120;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Description";
-            this.columnHeader1.Width = 200;
+            columnHeader1.Text = "Description";
+            columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Location";
-            this.columnHeader2.Width = 100;
+            columnHeader2.Text = "Location";
+            columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "OS";
-            this.columnHeader3.Width = 120;
+            columnHeader3.Text = "OS";
+            columnHeader3.Width = 120;
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Company";
-            this.columnHeader6.Width = 120;
+            columnHeader6.Text = "Company";
+            columnHeader6.Width = 120;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "IP";
-            this.columnHeader4.Width = 120;
+            columnHeader4.Text = "IP";
+            columnHeader4.Width = 120;
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "User";
-            this.columnHeader5.Width = 120;
+            columnHeader5.Text = "User";
+            columnHeader5.Width = 120;
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.remoteControlToolStripMenuItem,
-            this.computerManagementToolStripMenuItem,
-            this.sCCMConnectionToolStripMenuItem,
-            this.whoOnlineToolStripMenuItem,
-            this.discCToolStripMenuItem,
-            this.shareFolderToolStripMenuItem,
-            this.powerManagementToolStripMenuItem,
-            this.pingToolStripMenuItem,
-            this.printersToolStripMenuItem,
-            this.localAdminToolStripMenuItem,
-            this.sentMessageToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(203, 246);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { remoteControlToolStripMenuItem, computerManagementToolStripMenuItem, sCCMConnectionToolStripMenuItem, whoOnlineToolStripMenuItem, discCToolStripMenuItem, shareFolderToolStripMenuItem, powerManagementToolStripMenuItem, pingToolStripMenuItem, printersToolStripMenuItem, localAdminToolStripMenuItem, sentMessageToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.OwnerItem = toolStripButton3;
+            contextMenuStrip1.Size = new Size(203, 246);
             // 
             // remoteControlToolStripMenuItem
             // 
-            this.remoteControlToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources._32officeicons_31_89708;
-            this.remoteControlToolStripMenuItem.Name = "remoteControlToolStripMenuItem";
-            this.remoteControlToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.remoteControlToolStripMenuItem.Text = "Remote control";
-            this.remoteControlToolStripMenuItem.Click += new System.EventHandler(this.remoteControlToolStripMenuItem_Click);
+            remoteControlToolStripMenuItem.Image = Properties.Resources._32officeicons_31_89708;
+            remoteControlToolStripMenuItem.Name = "remoteControlToolStripMenuItem";
+            remoteControlToolStripMenuItem.Size = new Size(202, 22);
+            remoteControlToolStripMenuItem.Text = "Remote control";
+            remoteControlToolStripMenuItem.Click += remoteControlToolStripMenuItem_Click;
             // 
             // computerManagementToolStripMenuItem
             // 
-            this.computerManagementToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.rocket_startup_monitor_screen_computer_icon_124621;
-            this.computerManagementToolStripMenuItem.Name = "computerManagementToolStripMenuItem";
-            this.computerManagementToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.computerManagementToolStripMenuItem.Text = "Computer Management";
-            this.computerManagementToolStripMenuItem.Click += new System.EventHandler(this.computerManagementToolStripMenuItem_Click);
+            computerManagementToolStripMenuItem.Image = Properties.Resources.rocket_startup_monitor_screen_computer_icon_124621;
+            computerManagementToolStripMenuItem.Name = "computerManagementToolStripMenuItem";
+            computerManagementToolStripMenuItem.Size = new Size(202, 22);
+            computerManagementToolStripMenuItem.Text = "Computer Management";
+            computerManagementToolStripMenuItem.Click += computerManagementToolStripMenuItem_Click;
             // 
             // sCCMConnectionToolStripMenuItem
             // 
-            this.sCCMConnectionToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.cable_connect_connection_computer_hardware_icon_141983;
-            this.sCCMConnectionToolStripMenuItem.Name = "sCCMConnectionToolStripMenuItem";
-            this.sCCMConnectionToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.sCCMConnectionToolStripMenuItem.Text = "SCCM connection";
-            this.sCCMConnectionToolStripMenuItem.Click += new System.EventHandler(this.sCCMConnectionToolStripMenuItem_Click);
+            sCCMConnectionToolStripMenuItem.Image = Properties.Resources.cable_connect_connection_computer_hardware_icon_141983;
+            sCCMConnectionToolStripMenuItem.Name = "sCCMConnectionToolStripMenuItem";
+            sCCMConnectionToolStripMenuItem.Size = new Size(202, 22);
+            sCCMConnectionToolStripMenuItem.Text = "SCCM connection";
+            sCCMConnectionToolStripMenuItem.Click += sCCMConnectionToolStripMenuItem_Click;
             // 
             // whoOnlineToolStripMenuItem
             // 
-            this.whoOnlineToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.question_emoticon_5618;
-            this.whoOnlineToolStripMenuItem.Name = "whoOnlineToolStripMenuItem";
-            this.whoOnlineToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.whoOnlineToolStripMenuItem.Text = "Who online?";
-            this.whoOnlineToolStripMenuItem.Click += new System.EventHandler(this.whoOnlineToolStripMenuItem_Click);
+            whoOnlineToolStripMenuItem.Image = Properties.Resources.question_emoticon_5618;
+            whoOnlineToolStripMenuItem.Name = "whoOnlineToolStripMenuItem";
+            whoOnlineToolStripMenuItem.Size = new Size(202, 22);
+            whoOnlineToolStripMenuItem.Text = "Who online?";
+            whoOnlineToolStripMenuItem.Click += whoOnlineToolStripMenuItem_Click;
             // 
             // discCToolStripMenuItem
             // 
-            this.discCToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.documents_folder_18875;
-            this.discCToolStripMenuItem.Name = "discCToolStripMenuItem";
-            this.discCToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.discCToolStripMenuItem.Text = "Disc C:\\";
-            this.discCToolStripMenuItem.Click += new System.EventHandler(this.discCToolStripMenuItem_Click);
+            discCToolStripMenuItem.Image = Properties.Resources.documents_folder_18875;
+            discCToolStripMenuItem.Name = "discCToolStripMenuItem";
+            discCToolStripMenuItem.Size = new Size(202, 22);
+            discCToolStripMenuItem.Text = "Disc C:\\";
+            discCToolStripMenuItem.Click += discCToolStripMenuItem_Click;
             // 
             // shareFolderToolStripMenuItem
             // 
-            this.shareFolderToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.OneDrive_Folder_23362;
-            this.shareFolderToolStripMenuItem.Name = "shareFolderToolStripMenuItem";
-            this.shareFolderToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.shareFolderToolStripMenuItem.Text = "Share folder";
-            this.shareFolderToolStripMenuItem.Click += new System.EventHandler(this.shareFolderToolStripMenuItem_Click);
+            shareFolderToolStripMenuItem.Image = Properties.Resources.OneDrive_Folder_23362;
+            shareFolderToolStripMenuItem.Name = "shareFolderToolStripMenuItem";
+            shareFolderToolStripMenuItem.Size = new Size(202, 22);
+            shareFolderToolStripMenuItem.Text = "Share folder";
+            shareFolderToolStripMenuItem.Click += shareFolderToolStripMenuItem_Click;
             // 
             // powerManagementToolStripMenuItem
             // 
-            this.powerManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.shutdownToolStripMenuItem,
-            this.rebootToolStripMenuItem});
-            this.powerManagementToolStripMenuItem.Name = "powerManagementToolStripMenuItem";
-            this.powerManagementToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.powerManagementToolStripMenuItem.Text = "Power management";
+            powerManagementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { shutdownToolStripMenuItem, rebootToolStripMenuItem });
+            powerManagementToolStripMenuItem.Name = "powerManagementToolStripMenuItem";
+            powerManagementToolStripMenuItem.Size = new Size(202, 22);
+            powerManagementToolStripMenuItem.Text = "Power management";
             // 
             // shutdownToolStripMenuItem
             // 
-            this.shutdownToolStripMenuItem.Name = "shutdownToolStripMenuItem";
-            this.shutdownToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.shutdownToolStripMenuItem.Text = "Shutdown";
-            this.shutdownToolStripMenuItem.Click += new System.EventHandler(this.shutdownToolStripMenuItem_Click);
+            shutdownToolStripMenuItem.Name = "shutdownToolStripMenuItem";
+            shutdownToolStripMenuItem.Size = new Size(128, 22);
+            shutdownToolStripMenuItem.Text = "Shutdown";
+            shutdownToolStripMenuItem.Click += shutdownToolStripMenuItem_Click;
             // 
             // rebootToolStripMenuItem
             // 
-            this.rebootToolStripMenuItem.Name = "rebootToolStripMenuItem";
-            this.rebootToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.rebootToolStripMenuItem.Text = "Reboot";
-            this.rebootToolStripMenuItem.Click += new System.EventHandler(this.rebootToolStripMenuItem_Click);
+            rebootToolStripMenuItem.Name = "rebootToolStripMenuItem";
+            rebootToolStripMenuItem.Size = new Size(128, 22);
+            rebootToolStripMenuItem.Text = "Reboot";
+            rebootToolStripMenuItem.Click += rebootToolStripMenuItem_Click;
             // 
             // pingToolStripMenuItem
             // 
-            this.pingToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.ping_big_logo_icon_icons_com_68373;
-            this.pingToolStripMenuItem.Name = "pingToolStripMenuItem";
-            this.pingToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.pingToolStripMenuItem.Text = "Ping";
-            this.pingToolStripMenuItem.Click += new System.EventHandler(this.pingToolStripMenuItem_Click);
+            pingToolStripMenuItem.Image = Properties.Resources.ping_big_logo_icon_icons_com_68373;
+            pingToolStripMenuItem.Name = "pingToolStripMenuItem";
+            pingToolStripMenuItem.Size = new Size(202, 22);
+            pingToolStripMenuItem.Text = "Ping";
+            pingToolStripMenuItem.Click += pingToolStripMenuItem_Click;
             // 
             // printersToolStripMenuItem
             // 
-            this.printersToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.printer;
-            this.printersToolStripMenuItem.Name = "printersToolStripMenuItem";
-            this.printersToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.printersToolStripMenuItem.Text = "Printers";
-            this.printersToolStripMenuItem.Click += new System.EventHandler(this.printersToolStripMenuItem_Click);
+            printersToolStripMenuItem.Image = Properties.Resources.printer;
+            printersToolStripMenuItem.Name = "printersToolStripMenuItem";
+            printersToolStripMenuItem.Size = new Size(202, 22);
+            printersToolStripMenuItem.Text = "Printers";
+            printersToolStripMenuItem.Click += printersToolStripMenuItem_Click;
             // 
             // localAdminToolStripMenuItem
             // 
-            this.localAdminToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.image_07_10_22_12_14_2;
-            this.localAdminToolStripMenuItem.Name = "localAdminToolStripMenuItem";
-            this.localAdminToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.localAdminToolStripMenuItem.Text = "Local admin";
-            this.localAdminToolStripMenuItem.Click += new System.EventHandler(this.localAdminToolStripMenuItem_Click);
+            localAdminToolStripMenuItem.Image = Properties.Resources.image_07_10_22_12_14_2;
+            localAdminToolStripMenuItem.Name = "localAdminToolStripMenuItem";
+            localAdminToolStripMenuItem.Size = new Size(202, 22);
+            localAdminToolStripMenuItem.Text = "Local admin";
+            localAdminToolStripMenuItem.Click += localAdminToolStripMenuItem_Click;
             // 
             // sentMessageToolStripMenuItem
             // 
-            this.sentMessageToolStripMenuItem.Image = global::AD_Monitoring.Properties.Resources.student_work_office_desk_work_space_computer_working_support_icon_191191;
-            this.sentMessageToolStripMenuItem.Name = "sentMessageToolStripMenuItem";
-            this.sentMessageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.sentMessageToolStripMenuItem.Text = "Sent message";
-            this.sentMessageToolStripMenuItem.Click += new System.EventHandler(this.sentMessageToolStripMenuItem_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.DropDown = this.contextMenuStrip1;
-            this.toolStripButton3.Image = global::AD_Monitoring.Properties.Resources.computer_77914;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(66, 56);
-            this.toolStripButton3.Text = "Modes";
-            this.toolStripButton3.ToolTipText = "Modes";
+            sentMessageToolStripMenuItem.Image = Properties.Resources.student_work_office_desk_work_space_computer_working_support_icon_191191;
+            sentMessageToolStripMenuItem.Name = "sentMessageToolStripMenuItem";
+            sentMessageToolStripMenuItem.Size = new Size(202, 22);
+            sentMessageToolStripMenuItem.Text = "Sent message";
+            sentMessageToolStripMenuItem.Click += sentMessageToolStripMenuItem_Click;
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folderorangecd_93301.png");
-            this.imageList1.Images.SetKeyName(1, "folderorangewifi_93453.png");
-            this.imageList1.Images.SetKeyName(2, "folderyellow_92963.png");
-            this.imageList1.Images.SetKeyName(3, "like-icon_31852.png");
-            this.imageList1.Images.SetKeyName(4, "dislike-icon_31856.png");
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "folderorangecd_93301.png");
+            imageList1.Images.SetKeyName(1, "folderorangewifi_93453.png");
+            imageList1.Images.SetKeyName(2, "folderyellow_92963.png");
+            imageList1.Images.SetKeyName(3, "like-icon_31852.png");
+            imageList1.Images.SetKeyName(4, "dislike-icon_31856.png");
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton3.DropDown = contextMenuStrip1;
+            toolStripButton3.Image = Properties.Resources.computer_77914;
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(66, 56);
+            toolStripButton3.Text = "Modes";
+            toolStripButton3.ToolTipText = "Modes";
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(50, 50);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator4,
-            this.toolStripButton3,
-            this.toolStripSeparator2,
-            this.toolStripSplitButton1,
-            this.toolStripButton2,
-            this.toolStripSeparator1,
-            this.toolStripSeparator3,
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1145, 59);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.BackColor = Color.White;
+            toolStrip1.ImageScalingSize = new Size(50, 50);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripSeparator2, toolStripButton2, toolStripSeparator5, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1145, 59);
+            toolStrip1.TabIndex = 1;
+            toolStrip1.Text = "toolStrip1";
             // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 59);
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 59);
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 59);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reportOnSharedNetworkResourcesToolStripMenuItem,
-            this.reportOnLocalAdminsToolStripMenuItem});
-            this.toolStripSplitButton1.Image = global::AD_Monitoring.Properties.Resources.writing_77881;
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(66, 56);
-            this.toolStripSplitButton1.Text = "Reports";
-            this.toolStripSplitButton1.ToolTipText = "Reports";
-            // 
-            // reportOnSharedNetworkResourcesToolStripMenuItem
-            // 
-            this.reportOnSharedNetworkResourcesToolStripMenuItem.Name = "reportOnSharedNetworkResourcesToolStripMenuItem";
-            this.reportOnSharedNetworkResourcesToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.reportOnSharedNetworkResourcesToolStripMenuItem.Text = "Report on shared network resources";
-            // 
-            // reportOnLocalAdminsToolStripMenuItem
-            // 
-            this.reportOnLocalAdminsToolStripMenuItem.Name = "reportOnLocalAdminsToolStripMenuItem";
-            this.reportOnLocalAdminsToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.reportOnLocalAdminsToolStripMenuItem.Text = "Report on local admins";
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 59);
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::AD_Monitoring.Properties.Resources.microsoft_excel_alt_macos_bigsur_icon_189979;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(56, 56);
-            this.toolStripButton2.Text = "Excel";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 59);
+            toolStripButton2.AutoSize = false;
+            toolStripButton2.BackColor = Color.Transparent;
+            toolStripButton2.BackgroundImageLayout = ImageLayout.Zoom;
+            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton2.Image = Properties.Resources.microsoft_excel_alt_macos_bigsur_icon_189979;
+            toolStripButton2.ImageTransparentColor = Color.Transparent;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(56, 56);
+            toolStripButton2.Text = "Excel";
+            toolStripButton2.Click += toolStripButton2_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 59);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 59);
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::AD_Monitoring.Properties.Resources.iconfinder_technologymachineelectronicdevice39_4026421_113339;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(54, 56);
-            this.toolStripButton1.Text = "Scan computers";
-            this.toolStripButton1.Click += new System.EventHandler(this.ScanButton1_Click);
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = Properties.Resources.iconfinder_technologymachineelectronicdevice39_4026421_113339;
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(54, 56);
+            toolStripButton1.Text = "Scan computers";
+            toolStripButton1.Click += ScanButton1_Click;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 585);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1121, 120);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.Location = new Point(12, 585);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(1121, 120);
+            richTextBox1.TabIndex = 2;
+            richTextBox1.Text = "";
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(631, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(500, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "               ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label1.Location = new Point(631, 5);
+            label1.Name = "label1";
+            label1.Size = new Size(500, 15);
+            label1.TabIndex = 3;
+            label1.Text = "               ";
+            label1.TextAlign = ContentAlignment.TopRight;
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(12, 62);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(201, 517);
-            this.treeView1.TabIndex = 4;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            treeView1.ImageIndex = 0;
+            treeView1.ImageList = imageList1;
+            treeView1.Location = new Point(12, 62);
+            treeView1.Name = "treeView1";
+            treeView1.SelectedImageIndex = 0;
+            treeView1.Size = new Size(201, 517);
+            treeView1.TabIndex = 4;
+            treeView1.AfterSelect += treeView1_AfterSelect;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1002, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "label2";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new Point(1002, 40);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 5;
+            label2.Text = "label2";
+            label2.TextAlign = ContentAlignment.TopRight;
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton4.Enabled = false;
+            toolStripButton4.ImageTransparentColor = Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new Size(23, 56);
+            toolStripButton4.Text = "toolStripButton4";
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 59);
+            // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton5.Enabled = false;
+            toolStripButton5.ImageTransparentColor = Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new Size(23, 56);
+            toolStripButton5.Text = "toolStripButton5";
+            // 
+            // toolStripButton6
+            // 
+            toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton6.Enabled = false;
+            toolStripButton6.ImageTransparentColor = Color.Magenta;
+            toolStripButton6.Name = "toolStripButton6";
+            toolStripButton6.Size = new Size(23, 56);
+            toolStripButton6.Text = "toolStripButton6";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1145, 717);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.toolStrip1);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AD Monitoring";
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1145, 717);
+            Controls.Add(label2);
+            Controls.Add(treeView1);
+            Controls.Add(label1);
+            Controls.Add(richTextBox1);
+            Controls.Add(listView1);
+            Controls.Add(toolStrip1);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "AD Monitoring";
+            contextMenuStrip1.ResumeLayout(false);
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -464,12 +434,12 @@
         private ToolStripMenuItem printersToolStripMenuItem;
         private ToolStripMenuItem localAdminToolStripMenuItem;
         private ToolStripMenuItem sentMessageToolStripMenuItem;
-        private ToolStripSplitButton toolStripSplitButton1;
-        private ToolStripMenuItem reportOnSharedNetworkResourcesToolStripMenuItem;
-        private ToolStripMenuItem reportOnLocalAdminsToolStripMenuItem;
         private ToolStripMenuItem whoOnlineToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton toolStripButton1;
         public ContextMenuStrip contextMenuStrip1;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripButton toolStripButton5;
+        private ToolStripButton toolStripButton6;
+        private ToolStripButton toolStripButton4;
     }
 }
