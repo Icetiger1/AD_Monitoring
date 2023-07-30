@@ -56,7 +56,6 @@
             toolStripButton3 = new ToolStripSplitButton();
             toolStrip1 = new ToolStrip();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripSeparator2 = new ToolStripSeparator();
             toolStripButton2 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             toolStripButton1 = new ToolStripButton();
@@ -261,7 +260,7 @@
             // 
             toolStrip1.BackColor = Color.White;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripSeparator2, toolStripButton2, toolStripSeparator5, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripButton2, toolStripSeparator5, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1145, 59);
@@ -272,11 +271,6 @@
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 59);
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 59);
             // 
             // toolStripButton2
             // 
@@ -408,7 +402,6 @@
         public ListView listView1;
         private RichTextBox richTextBox1;
         private Label label1;
-        private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton toolStripButton2;
         private TreeView treeView1;
         private ImageList imageList1;
