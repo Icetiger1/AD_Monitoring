@@ -485,33 +485,9 @@ namespace AD_Monitoring
             {
                 try
                 {
-                    string ou = treeView1.SelectedNode.Text + "_" + treeView1.SelectedNode.Parent.Text;
-                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                    string path = @"Reports\";
-                    string filename = "Report_" + DateTime.UtcNow.Date.ToString("d") + "_" + DateTime.UtcNow.ToString("t") + "_" + ou + ".xlsx";
-                    using (var package = new ExcelPackage(new FileInfo(path + filename)))
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("sheet");
-                        int b = listView1.Columns.Count;
-                        for (int i = 0; i < b; i++)
-                        {
-                            sheet.Cells[1, i + 1].Value = listView1.Columns[i].Text;
-                        }
-                        int i1 = 1;
-                        int i2 = 2;
-                        foreach (ListViewItem lv in listView1.Items)
-                        {
-                            i1 = 1;
-                            foreach (ListViewItem.ListViewSubItem lvs in lv.SubItems)
-                            {
-                                sheet.Cells[i2, i1].Value = lvs.Text;
-                                i1++;
-                            }
-                            i2++;
-                        }
-                        sheet.Cells.AutoFitColumns();
-                        package.Save();
-                    }
+                    Cursor.Current = Cursors.WaitCursor;
+                    ExportToExcel.Excel(listView1);
+                    Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)
                 {
