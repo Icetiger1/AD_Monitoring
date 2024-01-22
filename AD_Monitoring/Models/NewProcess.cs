@@ -9,7 +9,7 @@ namespace AD_Monitoring.Models
 {
     public class NewProcess
     {
-        private Process myprocess = new Process();
+        private Process myprocess = new();
 
         public void Start()
         {

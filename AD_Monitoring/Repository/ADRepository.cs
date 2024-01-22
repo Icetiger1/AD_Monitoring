@@ -49,17 +49,23 @@ namespace AD_Monitoring.Repository
 
         public void GetComputers(ListView lv)
         {
-            DirectorySearcher? mySearcher = new DirectorySearcher(Entry);
+            DirectorySearcher? mySearcher = new(Entry);
             mySearcher.SearchRoot = this.Entry;
             try
             {
-                DirectorySearcher searcher = new DirectorySearcher(mySearcher.SearchRoot, "(objectClass=computer)", null, SearchScope.Subtree);
+                DirectorySearcher searcher = new
+                    (
+                        mySearcher.SearchRoot, 
+                        "(objectClass=computer)", 
+                        null, 
+                        SearchScope.Subtree
+                    );
                 SearchResultCollection? res = searcher.FindAll();
                 foreach (SearchResult r in res)
                 {
                     DirectoryEntry ent = r.GetDirectoryEntry();
 
-                    Computer cp = new Computer();
+                    Computer cp = new();
                     cp.Name = ent.Name.Remove(0, 3);
                     cp.Description = (string)ent.Properties["description"].Value;
                     cp.Location = (string)ent.Properties["location"].Value;
@@ -79,9 +85,9 @@ namespace AD_Monitoring.Repository
 
         public TreeAD GetFullTreeAD(DirectoryEntry entry, ref TreeAD tree)
         {
-            DirectorySearcher mySearcher = new DirectorySearcher(entry);
+            DirectorySearcher mySearcher = new(entry);
             mySearcher.SearchRoot = entry;
-            DirectorySearcher searcher = new DirectorySearcher
+            DirectorySearcher searcher = new
                 (
                      mySearcher.SearchRoot,
                      "(objectClass=organizationalunit)",
@@ -96,9 +102,9 @@ namespace AD_Monitoring.Repository
                 {
                     DirectoryEntry ent = r.GetDirectoryEntry();
 
-                    DirectorySearcher mySearcher2 = new DirectorySearcher(ent);
+                    DirectorySearcher mySearcher2 = new(ent);
                     mySearcher2.SearchRoot = ent;
-                    DirectorySearcher searcher2 = new DirectorySearcher
+                    DirectorySearcher searcher2 = new
                         (
                             mySearcher2.SearchRoot,
                             "(objectClass=computer)",
@@ -110,7 +116,7 @@ namespace AD_Monitoring.Repository
                     if (res2 != null)
                     {
                         string cn = ent.Name.Remove(0, 3);
-                        TreeAD node = new TreeAD(ent.Name, ent.Path);
+                        TreeAD node = new(ent.Name, ent.Path);
                         tree.AddChildren(node);
 
                     }
@@ -121,7 +127,7 @@ namespace AD_Monitoring.Repository
 
         public TreeAD GetFullTreeAD()
         {
-            TreeAD tree = new TreeAD();
+            TreeAD tree = new();
             GetFullTreeAD(this.Entry, ref tree);
 
             return tree;
@@ -148,15 +154,18 @@ namespace AD_Monitoring.Repository
                 lvl1 = "OU=" + tv.SelectedNode.Parent.Text + ",";
                 lvl = "OU=" + tv.SelectedNode.Parent.Parent.Text + ",";
             }
-            List<string> t = new();
-            string tmp = GetDomain();
-            t = tmp.Split('.').ToList();
-            string tmp1 = @"LDAP://" + tmp + "/" + lvl2 + lvl1 + lvl;
+
+            List<string> tmp = new();
+
+            tmp = this.Domain.Split('.').ToList();
+            string tmp1 = @"LDAP://" + this.Domain + "/" + lvl2 + lvl1 + lvl;
             string? tmp2 = default;
-            for (int a = 0; a < t.Count; a++)
+
+            for (int a = 0; a < tmp.Count; a++)
             {
-                tmp2 += "DC=" + t[a] + ",";
+                tmp2 += "DC=" + tmp[a] + ",";
             }
+
             string nameOU = tmp1 + tmp2;
             string domain = nameOU.Remove(nameOU.Length - 1, 1);
             return domain;

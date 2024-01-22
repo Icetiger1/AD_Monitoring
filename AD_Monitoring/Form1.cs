@@ -6,10 +6,8 @@ namespace AD_Monitoring
 {
     public partial class Form1 : Form
     {
-        public static List<TreeAD> TreeADs = new List<TreeAD>();
-        public static ADRepository aDRepository = new ADRepository();
-        public static ModesReposetory modesReposetory = new ModesReposetory();
-
+        private static ADRepository aDRepository = new();
+        private static ModesReposetory modesReposetory = new();
 
         public Form1()
         {
@@ -359,7 +357,7 @@ namespace AD_Monitoring
 
         private void sentMessageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
+            Form2 f2 = new();
             for (int i = 0; i < listView1.Items.Count; i++)
             {
                 if (listView1.Items[i].Selected == true)

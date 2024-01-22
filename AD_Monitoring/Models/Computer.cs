@@ -16,7 +16,7 @@ namespace AD_Monitoring.Models
 
         public void AddToListView(ListView lv)
         {
-            ListViewItem item1 = new ListViewItem(this.Name);
+            ListViewItem item1 = new(this.Name);
             item1.SubItems.Add(this.Description);
             item1.SubItems.Add(this.Location);
             item1.SubItems.Add(this.OS);

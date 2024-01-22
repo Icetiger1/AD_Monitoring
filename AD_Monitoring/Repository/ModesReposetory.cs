@@ -14,7 +14,7 @@ namespace AD_Monitoring.Repository
 {
     public class ModesReposetory
     {
-        private NewProcess myprocess = new NewProcess();
+        private NewProcess myprocess = new();
 
         public void Mstsc(string cn)
         {
@@ -113,7 +113,7 @@ namespace AD_Monitoring.Repository
                     for (int ttl = 1; ttl <= maxTTL; ttl++)
                     {
 
-                        PingOptions options = new PingOptions(ttl, true);
+                        PingOptions options = new(ttl, true);
                         PingReply reply = pinger.Send(cn, timeout, buffer, options);
                         if (reply.Status == IPStatus.Success || reply.Status == IPStatus.TtlExpired)
                         {
@@ -149,12 +149,12 @@ namespace AD_Monitoring.Repository
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                ManagementScope scope = new ManagementScope(@"\\" + cn + @"\root\cimv2");
+                ManagementScope scope = new(@"\\" + cn + @"\root\cimv2");
                 scope.Connect();
                 rich.Text += "Принтеры " + cn + ":" + Environment.NewLine;
                 if (scope.IsConnected)
                 {
-                    ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\" + cn + @"\root\cimv2", "SELECT * From Win32_Printer");
+                    ManagementObjectSearcher searcher = new(@"\\" + cn + @"\root\cimv2", "SELECT * From Win32_Printer");
                     foreach (ManagementObject obj in searcher.Get())
                     {
                         rich.Text += obj["Name"].ToString() + Environment.NewLine;
@@ -173,7 +173,7 @@ namespace AD_Monitoring.Repository
         }
         public void LocalAdmin(string cn, RichTextBox rich)
         {
-            using (DirectoryEntry machine = new DirectoryEntry("WinNT://" + cn))
+            using (DirectoryEntry machine = new("WinNT://" + cn))
             {
                 try
                 {

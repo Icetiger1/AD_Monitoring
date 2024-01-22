@@ -13,7 +13,7 @@ namespace AD_Monitoring
 {
     public partial class Form2 : Form
     {
-        private static ModesReposetory modesReposetory = new ModesReposetory();
+        private static ModesReposetory modesReposetory = new();
 
         public Form2()
         {
