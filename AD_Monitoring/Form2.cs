@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AD_Monitoring.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace AD_Monitoring
 {
     public partial class Form2 : Form
     {
+        private static ModesReposetory modesReposetory = new ModesReposetory();
+
         public Form2()
         {
             InitializeComponent();
@@ -24,7 +27,7 @@ namespace AD_Monitoring
                 Cursor.Current = Cursors.WaitCursor;
                 try
                 {
-                    Modes.Send_msg(textBox1.Text, textBox2.Text);
+                    modesReposetory.Send_msg(textBox1.Text, textBox2.Text);
                 }
                 catch (Exception ex)
                 {

@@ -1,11 +1,6 @@
 using AD_Monitoring.Infrastructure;
 using AD_Monitoring.Models;
 using AD_Monitoring.Repository;
-using OfficeOpenXml;
-using System.Diagnostics;
-using System.DirectoryServices;
-using System.DirectoryServices.ActiveDirectory;
-using System.Net.NetworkInformation;
 
 namespace AD_Monitoring
 {
