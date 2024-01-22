@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using AD_Monitoring.Models;
 
 namespace AD_Monitoring
 {

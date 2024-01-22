@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AD_Monitoring
+namespace AD_Monitoring.Infrastructure
 {
 
     class ListViewItemComparer : IComparer
@@ -21,10 +21,10 @@ namespace AD_Monitoring
         public int Compare(object x, object y)
         {
             int returnVal = -1;
-            returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
+            returnVal = string.Compare(((ListViewItem)x).SubItems[col].Text,
             ((ListViewItem)y).SubItems[col].Text);
             return returnVal;
         }
     }
-    
+
 }

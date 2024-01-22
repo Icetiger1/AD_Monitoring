@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AD_Monitoring
+namespace AD_Monitoring.Infrastructure
 {
     public class ExportToExcel
     {
@@ -17,8 +17,8 @@ namespace AD_Monitoring
 
             Microsoft.Office.Interop.Excel.Application app = new();
             app.Visible = false;
-            Microsoft.Office.Interop.Excel.Workbook wb = app.Workbooks.Add(1);
-            Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
+            Workbook wb = app.Workbooks.Add(1);
+            Worksheet ws = (Worksheet)wb.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range range = null;
             Microsoft.Office.Interop.Excel.Range range1 = null;
             range1 = ws.get_Range("A1", "G1");

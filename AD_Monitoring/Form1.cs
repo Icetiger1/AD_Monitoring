@@ -1,3 +1,6 @@
+using AD_Monitoring.Infrastructure;
+using AD_Monitoring.Models;
+using AD_Monitoring.Repository;
 using OfficeOpenXml;
 using System.Diagnostics;
 using System.DirectoryServices;
@@ -9,25 +12,37 @@ namespace AD_Monitoring
     public partial class Form1 : Form
     {
         public static List<TreeAD> TreeADs = new List<TreeAD>();
+        public static ADRepository aDRepository = new ADRepository();
+        public static ModesReposetory modesReposetory = new ModesReposetory();
+
 
         public Form1()
         {
             InitializeComponent();
-            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
+            this.listView1.ColumnClick += new ColumnClickEventHandler(this.listView1_ColumnClick);
             label2.Text = "";
             try
             {
-                string top = ADConnection.GetDomain();
-                label1.Text = "My domain: " + top;
+                label1.Text = "My domain: " + aDRepository.GetDomain();
                 label1.ForeColor = Color.DarkGreen;
-                string ldap = ADConnection.GetLDAPDomain();
-                ADConnection.ADDTree(ldap, TreeADs, treeView1);
+
+                TreeAD trees = aDRepository.GetFullTreeAD();
+
+                foreach (TreeAD tree in trees)
+                {
+                    treeView1.Nodes.Add(tree.GetName());
+
+                    foreach (TreeAD treechild in tree.GetChildren())
+                    {
+                        treeView1.Nodes[tree.GetName()].Nodes.Add(treechild.GetName());
+                    }
+                }
             }
             catch (Exception ex)
             {
                 label1.Text = "Domain is unavailable";
                 label1.ForeColor = Color.RosyBrown;
-                MessageBox.Show("Could not get information about the domain of the computer. " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not get information about the domain of the computer. \\" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -45,28 +60,25 @@ namespace AD_Monitoring
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
             if (treeView1.SelectedNode.Nodes.Count == 0)
             {
                 listView1.Items.Clear();
 
-                string domain = ADConnection.GetLDAPTreeNodes(treeView1);
+                string domain = aDRepository.GetLDAPTreeNodes(treeView1);
                 try
                 {
-                    ADConnection.GetComputers(domain, listView1);
+                    aDRepository.GetComputers(listView1);
                     label2.Text = "Objects count: " + listView1.Items.Count;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 treeView1.SelectedNode.Expand();
             }
-
-
         }
 
         private void discCToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,11 +92,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.Open_disk(comp_name);
+                            modesReposetory.Open_disk(comp_name);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -106,11 +118,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.mstsc(comp_name);
+                            modesReposetory.Mstsc(comp_name);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -130,7 +142,7 @@ namespace AD_Monitoring
                     string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
-                        Modes.compmgmt(comp_name);
+                        modesReposetory.Compmgmt(comp_name);
                     }
                     else
                     {
@@ -154,7 +166,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            scanInfo.Login = Modes.PSLogin(comp_name);
+                            scanInfo.Login = modesReposetory.PSLogin(comp_name);
                             if (scanInfo.Login != null)
                             {
                                 listView1.Items[i].SubItems[6].Text = scanInfo.Login;
@@ -166,7 +178,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             listView1.Items[i].SubItems[6].Text = "Нет данных";
                         }
                     }
@@ -190,11 +202,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.Share_Folders(comp_name);
+                            modesReposetory.Share_Folders(comp_name);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -217,11 +229,11 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /s /f /c \"Компьютер будет выключен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            Modes.ShutDown(comp_name, key, richTextBox1);
+                            modesReposetory.ShutDown(comp_name, key, richTextBox1);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -244,11 +256,11 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /r /f /c \"Компьютер будет перезагружен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            Modes.ShutDown(comp_name, key, richTextBox1);
+                            modesReposetory.ShutDown(comp_name, key, richTextBox1);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -270,7 +282,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            string ip = Modes.Ping(comp_name);
+                            string ip = modesReposetory.Ping(comp_name);
                             if (ip != null)
                             {
                                 listView1.Items[i].SubItems[5].Text = ip;
@@ -285,7 +297,7 @@ namespace AD_Monitoring
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -307,11 +319,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.Printers(comp_name, richTextBox1);
+                            modesReposetory.Printers(comp_name, richTextBox1);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -334,11 +346,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.LocalAdmin(comp_name, richTextBox1);
+                            modesReposetory.LocalAdmin(comp_name, richTextBox1);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -369,34 +381,31 @@ namespace AD_Monitoring
 
         private void ScanButton1_Click(object sender, EventArgs e)
         {
-            if (listView1.Items.Count != 0)
+            if (listView1.Items != null || listView1.Items.Count != 0)
             {
                 treeView1.Enabled = false;
                 toolStripButton1.Enabled = false;
-                string start = "Start of the scan - " + DateTime.Now;
+                string start = "Начало выполнения сканирования - " + DateTime.Now;
                 richTextBox1.Text += start + Environment.NewLine;
                 listView1.ColumnClick -= listView1_ColumnClick;
                 listView1.ColumnClick += new ColumnClickEventHandler(listView2_delete_ColumnClick);
                 Zapolnyaem_ip_login();
             }
-            else
-            {
-                richTextBox1.Text += "There is no data for scanning. Select an item in the treeview to display the data." + Environment.NewLine;
-            }
         }
-
         private async void Zapolnyaem_ip_login()
         {
             int b = listView1.Items.Count;
             var tasks = new List<Task>();
             var tasks2 = new List<Task>();
+
             for (int i = 0; i < b; i++)
             {
                 string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
                 tasks.Add(Task.Run(() => AsyncGetIP(comp_name, b)));
             }
             await Task.WhenAll(tasks);
-            string end = "End of scan execution - " + DateTime.Now;
+
+            string end = "Конец выполнения сканирования - " + DateTime.Now;
             richTextBox1.Text += end + Environment.NewLine;
             listView1.ColumnClick -= listView2_delete_ColumnClick;
             listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
@@ -408,10 +417,10 @@ namespace AD_Monitoring
         {
             string? result_ip = null;
             string? result_user = null;
-            result_ip = await Task.Run(() => Modes.Ping(cn));
+            result_ip = await Task.Run(() => modesReposetory.Ping(cn));
             if (result_ip != null)
             {
-                result_user = await Task.Run(() => Modes.PSLogin(cn));
+                result_user = await Task.Run(() => modesReposetory.PSLogin(cn));
                 for (int j = 0; j < count; j++)
                 {
                     this.Invoke(new Action(() =>
@@ -463,11 +472,11 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            Modes.CmRcViewer(comp_name);
+                            modesReposetory.CmRcViewer(comp_name);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
