@@ -57,7 +57,6 @@ namespace AD_Monitoring
             {
                 listViewAD.Items.Clear();
 
-                string domain = aDRepository.GetLDAPTreeNodes(treeView1);
                 try
                 {
                     aDRepository.GetComputers(listViewAD);
@@ -222,7 +221,7 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /s /f /c \"Компьютер будет выключен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            modesReposetory.ShutDown(comp_name, key, richTextBox1);
+                            modesReposetory.ShutDown(comp_name, key);
                         }
                         catch (Exception ex)
                         {
@@ -249,7 +248,7 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /r /f /c \"Компьютер будет перезагружен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            modesReposetory.ShutDown(comp_name, key, richTextBox1);
+                            modesReposetory.ShutDown(comp_name, key);
                         }
                         catch (Exception ex)
                         {

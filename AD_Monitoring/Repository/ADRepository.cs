@@ -32,10 +32,8 @@ namespace AD_Monitoring.Repository
 
         public string GetLDAPDomain()
         {
-            List<string> tmpList = new();
-            string tmp = Domain;
-            tmpList = tmp.Split('.').ToList();
-            string tmp2 = @"LDAP://" + tmp + "/";
+            List<string> tmpList = this.Domain.Split('.').ToList();
+            string tmp2 = @"LDAP://" + this.Domain + "/";
             string? tmp3 = default;
             string domainName;
             for (int i = 0; i < tmpList.Count; i++)
@@ -88,7 +86,7 @@ namespace AD_Monitoring.Repository
             }
         }
 
-        public TreeAD GetFullTreeAD(DirectoryEntry entry, ref TreeAD tree)
+        public static TreeAD GetFullTreeAD(DirectoryEntry entry, ref TreeAD tree)
         {
             DirectorySearcher mySearcher = new(entry)
             {
@@ -122,10 +120,10 @@ namespace AD_Monitoring.Repository
                             SearchScope.Subtree
                         );
 
-                    SearchResult? res2 = searcher.FindOne();
+                    SearchResult? res2 = searcher2.FindOne();
                     if (res2 != null)
                     {
-                        string cn = ent.Name.Remove(0, 3);
+                        //string cn = ent.Name.Remove(0, 3);
                         TreeAD node = new(ent.Name, ent.Path);
                         tree.AddChildren(node);
 
@@ -165,9 +163,7 @@ namespace AD_Monitoring.Repository
                 lvl = "OU=" + tv.SelectedNode.Parent.Parent.Text + ",";
             }
 
-            List<string> tmp = new();
-
-            tmp = this.Domain.Split('.').ToList();
+            List<string> tmp = this.Domain.Split('.').ToList();
             string tmp1 = @"LDAP://" + this.Domain + "/" + lvl2 + lvl1 + lvl;
             string? tmp2 = default;
 

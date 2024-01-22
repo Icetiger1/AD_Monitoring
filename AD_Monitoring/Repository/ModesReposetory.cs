@@ -88,9 +88,8 @@ namespace AD_Monitoring.Repository
             this.myprocess.Start();
             this.myprocess.Close();
         }
-        public void ShutDown(string cn, string key, RichTextBox rich)
+        public void ShutDown(string cn, string key)
         {
-            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
             this.myprocess.SetStyle(true, ProcessWindowStyle.Hidden, true);
             this.myprocess.SetAguments(@"C:\Windows\System32\cmd.exe", @$"/k shutdown /m \\{cn}{key}");
             this.myprocess.Start();
@@ -155,7 +154,7 @@ namespace AD_Monitoring.Repository
                 if (scope.IsConnected)
                 {
                     ManagementObjectSearcher searcher = new(@"\\" + cn + @"\root\cimv2", "SELECT * From Win32_Printer");
-                    foreach (ManagementObject obj in searcher.Get())
+                    foreach (ManagementObject obj in searcher.Get().Cast<ManagementObject>())
                     {
                         rich.Text += obj["Name"].ToString() + Environment.NewLine;
                     }

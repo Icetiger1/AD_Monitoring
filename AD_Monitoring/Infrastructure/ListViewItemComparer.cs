@@ -10,6 +10,7 @@ namespace AD_Monitoring.Infrastructure
     class ListViewItemComparer : IComparer
     {
         private int col;
+
         public ListViewItemComparer()
         {
             col = 0;

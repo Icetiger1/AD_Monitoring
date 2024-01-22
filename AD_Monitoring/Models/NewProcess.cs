@@ -59,7 +59,7 @@ namespace AD_Monitoring.Models
         }
         public void SetStandardOutput(bool status)
         {
-            this.myprocess.StartInfo.RedirectStandardOutput = true;
+            this.myprocess.StartInfo.RedirectStandardOutput = status;
         }
 
         public void SetStandardOutputEncoding(Encoding encoding)

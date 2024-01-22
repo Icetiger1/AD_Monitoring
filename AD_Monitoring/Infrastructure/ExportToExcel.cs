@@ -22,17 +22,15 @@ namespace AD_Monitoring.Infrastructure
 
             Workbook wb = app.Workbooks.Add(1);
             Worksheet ws = (Worksheet)wb.Worksheets[1];
-            Microsoft.Office.Interop.Excel.Range range = null;
-            Microsoft.Office.Interop.Excel.Range range1 = null;
-            range1 = ws.get_Range("A1", "G1");
-            range = ws.get_Range("A2", "G" + a);
+            Microsoft.Office.Interop.Excel.Range range = ws.get_Range("A1", "G1");
+            Microsoft.Office.Interop.Excel.Range range2 = ws.get_Range("A2", "G" + a);
 
             for (int i = 0; i < b; i++)
             {
                 ws.Cells[1, i + 1] = listview.Columns[i].Text;
-                range1.Font.Size = 12;
-                range1.Font.Bold = true;
-                range1.Interior.Color = Color.PaleGreen;
+                range.Font.Size = 12;
+                range.Font.Bold = true;
+                range.Interior.Color = Color.PaleGreen;
             }
             int i1 = 1;
             int i2 = 2;
@@ -46,7 +44,7 @@ namespace AD_Monitoring.Infrastructure
                 }
                 i2++;
             }
-            range.Columns.AutoFit();
+            range2.Columns.AutoFit();
             app.Visible = true;
         }
     }

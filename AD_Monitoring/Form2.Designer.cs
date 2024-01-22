@@ -70,7 +70,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(CancelButton);
+            groupBox1.Controls.Add(CancelFormButton);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(SendMessageButton);
             groupBox1.Controls.Add(label1);
@@ -92,15 +92,15 @@
             // 
             // CancelButton
             // 
-            CancelButton.BackColor = Color.White;
-            CancelButton.FlatStyle = FlatStyle.Flat;
-            CancelButton.Location = new Point(87, 168);
-            CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(75, 23);
-            CancelButton.TabIndex = 5;
-            CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = false;
-            CancelButton.Click += CancelButton_Click;
+            CancelFormButton.BackColor = Color.White;
+            CancelFormButton.FlatStyle = FlatStyle.Flat;
+            CancelFormButton.Location = new Point(87, 168);
+            CancelFormButton.Name = "CancelButton";
+            CancelFormButton.Size = new Size(75, 23);
+            CancelFormButton.TabIndex = 5;
+            CancelFormButton.Text = "Cancel";
+            CancelFormButton.UseVisualStyleBackColor = false;
+            CancelFormButton.Click += CancelButton_Click;
             // 
             // label2
             // 
@@ -134,7 +134,7 @@
         private Label label1;
         private GroupBox groupBox1;
         private TextBox textBox2;
-        private Button CancelButton;
+        private Button CancelFormButton;
         private Label label2;
         public TextBox textBox1;
     }
