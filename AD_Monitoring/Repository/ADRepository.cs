@@ -49,8 +49,11 @@ namespace AD_Monitoring.Repository
 
         public void GetComputers(ListView lv)
         {
-            DirectorySearcher? mySearcher = new(Entry);
-            mySearcher.SearchRoot = this.Entry;
+            DirectorySearcher? mySearcher = new(Entry)
+            {
+                SearchRoot = this.Entry
+            };
+
             try
             {
                 DirectorySearcher searcher = new
@@ -65,12 +68,14 @@ namespace AD_Monitoring.Repository
                 {
                     DirectoryEntry ent = r.GetDirectoryEntry();
 
-                    Computer cp = new();
-                    cp.Name = ent.Name.Remove(0, 3);
-                    cp.Description = (string)ent.Properties["description"].Value;
-                    cp.Location = (string)ent.Properties["location"].Value;
-                    cp.OS = (string)ent.Properties["operatingSystem"].Value;
-                    cp.Company = (string)ent.Properties["company"].Value;
+                    Computer cp = new()
+                    {
+                        Name = ent.Name.Remove(0, 3),
+                        Description = (string)ent.Properties["description"].Value,
+                        Location = (string)ent.Properties["location"].Value,
+                        OS = (string)ent.Properties["operatingSystem"].Value,
+                        Company = (string)ent.Properties["company"].Value
+                    };
 
                     cp.AddToListView(lv);
                 }
@@ -85,8 +90,11 @@ namespace AD_Monitoring.Repository
 
         public TreeAD GetFullTreeAD(DirectoryEntry entry, ref TreeAD tree)
         {
-            DirectorySearcher mySearcher = new(entry);
-            mySearcher.SearchRoot = entry;
+            DirectorySearcher mySearcher = new(entry)
+            {
+                SearchRoot = entry
+            };
+
             DirectorySearcher searcher = new
                 (
                      mySearcher.SearchRoot,
@@ -102,8 +110,10 @@ namespace AD_Monitoring.Repository
                 {
                     DirectoryEntry ent = r.GetDirectoryEntry();
 
-                    DirectorySearcher mySearcher2 = new(ent);
-                    mySearcher2.SearchRoot = ent;
+                    DirectorySearcher mySearcher2 = new(ent)
+                    {
+                        SearchRoot = ent
+                    };
                     DirectorySearcher searcher2 = new
                         (
                             mySearcher2.SearchRoot,

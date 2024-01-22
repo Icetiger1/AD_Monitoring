@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            SendMessageButton = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
             textBox2 = new TextBox();
-            button2 = new Button();
+            CancelButton = new Button();
             label2 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // SendMessageButton
             // 
-            button1.BackColor = Color.White;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(6, 168);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Send";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            SendMessageButton.BackColor = Color.White;
+            SendMessageButton.FlatStyle = FlatStyle.Flat;
+            SendMessageButton.Location = new Point(6, 168);
+            SendMessageButton.Name = "SendMessageButton";
+            SendMessageButton.Size = new Size(75, 23);
+            SendMessageButton.TabIndex = 0;
+            SendMessageButton.Text = "Send";
+            SendMessageButton.UseVisualStyleBackColor = false;
+            SendMessageButton.Click += SendMessageButton_Click;
             // 
             // textBox1
             // 
@@ -70,9 +70,9 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(CancelButton);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(SendMessageButton);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Location = new Point(12, 4);
@@ -90,17 +90,17 @@
             textBox2.Size = new Size(298, 154);
             textBox2.TabIndex = 6;
             // 
-            // button2
+            // CancelButton
             // 
-            button2.BackColor = Color.White;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(87, 168);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 5;
-            button2.Text = "Cancel";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            CancelButton.BackColor = Color.White;
+            CancelButton.FlatStyle = FlatStyle.Flat;
+            CancelButton.Location = new Point(87, 168);
+            CancelButton.Name = "CancelButton";
+            CancelButton.Size = new Size(75, 23);
+            CancelButton.TabIndex = 5;
+            CancelButton.Text = "Cancel";
+            CancelButton.UseVisualStyleBackColor = false;
+            CancelButton.Click += CancelButton_Click;
             // 
             // label2
             // 
@@ -130,11 +130,11 @@
 
         #endregion
 
-        private Button button1;
+        private Button SendMessageButton;
         private Label label1;
         private GroupBox groupBox1;
         private TextBox textBox2;
-        private Button button2;
+        private Button CancelButton;
         private Label label2;
         public TextBox textBox1;
     }

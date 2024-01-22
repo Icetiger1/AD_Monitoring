@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            listView1 = new ListView();
+            listViewAD = new ListView();
             ColumnHeader = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
@@ -52,16 +52,16 @@
             printersToolStripMenuItem = new ToolStripMenuItem();
             localAdminToolStripMenuItem = new ToolStripMenuItem();
             sentMessageToolStripMenuItem = new ToolStripMenuItem();
-            toolStripButton3 = new ToolStripSplitButton();
             imageList1 = new ImageList(components);
+            toolStripButton3 = new ToolStripSplitButton();
             toolStrip1 = new ToolStrip();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripButton2 = new ToolStripButton();
+            excelExportButton = new ToolStripButton();
             toolStripButton5 = new ToolStripButton();
             toolStripButton6 = new ToolStripButton();
             toolStripButton4 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
-            toolStripButton1 = new ToolStripButton();
+            runScanerButton = new ToolStripButton();
             richTextBox1 = new RichTextBox();
             label1 = new Label();
             treeView1 = new TreeView();
@@ -70,25 +70,25 @@
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // listView1
+            // listViewAD
             // 
-            listView1.Activation = ItemActivation.OneClick;
-            listView1.Alignment = ListViewAlignment.SnapToGrid;
-            listView1.AllowColumnReorder = true;
-            listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            listView1.Columns.AddRange(new ColumnHeader[] { ColumnHeader, columnHeader1, columnHeader2, columnHeader3, columnHeader6, columnHeader4, columnHeader5 });
-            listView1.ContextMenuStrip = contextMenuStrip1;
-            listView1.FullRowSelect = true;
-            listView1.GridLines = true;
-            listView1.LargeImageList = imageList1;
-            listView1.Location = new Point(219, 62);
-            listView1.MultiSelect = false;
-            listView1.Name = "listView1";
-            listView1.Size = new Size(914, 517);
-            listView1.SmallImageList = imageList1;
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            listViewAD.Activation = ItemActivation.OneClick;
+            listViewAD.Alignment = ListViewAlignment.SnapToGrid;
+            listViewAD.AllowColumnReorder = true;
+            listViewAD.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listViewAD.Columns.AddRange(new ColumnHeader[] { ColumnHeader, columnHeader1, columnHeader2, columnHeader3, columnHeader6, columnHeader4, columnHeader5 });
+            listViewAD.ContextMenuStrip = contextMenuStrip1;
+            listViewAD.FullRowSelect = true;
+            listViewAD.GridLines = true;
+            listViewAD.LargeImageList = imageList1;
+            listViewAD.Location = new Point(219, 62);
+            listViewAD.MultiSelect = false;
+            listViewAD.Name = "listViewAD";
+            listViewAD.Size = new Size(914, 517);
+            listViewAD.SmallImageList = imageList1;
+            listViewAD.TabIndex = 0;
+            listViewAD.UseCompatibleStateImageBehavior = false;
+            listViewAD.View = View.Details;
             // 
             // ColumnHeader
             // 
@@ -130,7 +130,7 @@
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { remoteControlToolStripMenuItem, computerManagementToolStripMenuItem, sCCMConnectionToolStripMenuItem, whoOnlineToolStripMenuItem, discCToolStripMenuItem, shareFolderToolStripMenuItem, powerManagementToolStripMenuItem, pingToolStripMenuItem, printersToolStripMenuItem, localAdminToolStripMenuItem, sentMessageToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.OwnerItem = toolStripButton3;
-            contextMenuStrip1.Size = new Size(203, 268);
+            contextMenuStrip1.Size = new Size(203, 246);
             // 
             // remoteControlToolStripMenuItem
             // 
@@ -138,7 +138,7 @@
             remoteControlToolStripMenuItem.Name = "remoteControlToolStripMenuItem";
             remoteControlToolStripMenuItem.Size = new Size(202, 22);
             remoteControlToolStripMenuItem.Text = "Remote control";
-            remoteControlToolStripMenuItem.Click += remoteControlToolStripMenuItem_Click;
+            remoteControlToolStripMenuItem.Click += RemoteControlToolStripMenuItem_Click;
             // 
             // computerManagementToolStripMenuItem
             // 
@@ -146,7 +146,7 @@
             computerManagementToolStripMenuItem.Name = "computerManagementToolStripMenuItem";
             computerManagementToolStripMenuItem.Size = new Size(202, 22);
             computerManagementToolStripMenuItem.Text = "Computer Management";
-            computerManagementToolStripMenuItem.Click += computerManagementToolStripMenuItem_Click;
+            computerManagementToolStripMenuItem.Click += ComputerManagementToolStripMenuItem_Click;
             // 
             // sCCMConnectionToolStripMenuItem
             // 
@@ -162,7 +162,7 @@
             whoOnlineToolStripMenuItem.Name = "whoOnlineToolStripMenuItem";
             whoOnlineToolStripMenuItem.Size = new Size(202, 22);
             whoOnlineToolStripMenuItem.Text = "Who online?";
-            whoOnlineToolStripMenuItem.Click += whoOnlineToolStripMenuItem_Click;
+            whoOnlineToolStripMenuItem.Click += WhoOnlineToolStripMenuItem_Click;
             // 
             // discCToolStripMenuItem
             // 
@@ -170,7 +170,7 @@
             discCToolStripMenuItem.Name = "discCToolStripMenuItem";
             discCToolStripMenuItem.Size = new Size(202, 22);
             discCToolStripMenuItem.Text = "Disc C:\\";
-            discCToolStripMenuItem.Click += discCToolStripMenuItem_Click;
+            discCToolStripMenuItem.Click += DiscCToolStripMenuItem_Click;
             // 
             // shareFolderToolStripMenuItem
             // 
@@ -178,7 +178,7 @@
             shareFolderToolStripMenuItem.Name = "shareFolderToolStripMenuItem";
             shareFolderToolStripMenuItem.Size = new Size(202, 22);
             shareFolderToolStripMenuItem.Text = "Share folder";
-            shareFolderToolStripMenuItem.Click += shareFolderToolStripMenuItem_Click;
+            shareFolderToolStripMenuItem.Click += ShareFolderToolStripMenuItem_Click;
             // 
             // powerManagementToolStripMenuItem
             // 
@@ -192,14 +192,14 @@
             shutdownToolStripMenuItem.Name = "shutdownToolStripMenuItem";
             shutdownToolStripMenuItem.Size = new Size(128, 22);
             shutdownToolStripMenuItem.Text = "Shutdown";
-            shutdownToolStripMenuItem.Click += shutdownToolStripMenuItem_Click;
+            shutdownToolStripMenuItem.Click += ShutdownToolStripMenuItem_Click;
             // 
             // rebootToolStripMenuItem
             // 
             rebootToolStripMenuItem.Name = "rebootToolStripMenuItem";
             rebootToolStripMenuItem.Size = new Size(128, 22);
             rebootToolStripMenuItem.Text = "Reboot";
-            rebootToolStripMenuItem.Click += rebootToolStripMenuItem_Click;
+            rebootToolStripMenuItem.Click += RebootToolStripMenuItem_Click;
             // 
             // pingToolStripMenuItem
             // 
@@ -207,7 +207,7 @@
             pingToolStripMenuItem.Name = "pingToolStripMenuItem";
             pingToolStripMenuItem.Size = new Size(202, 22);
             pingToolStripMenuItem.Text = "Ping";
-            pingToolStripMenuItem.Click += pingToolStripMenuItem_Click;
+            pingToolStripMenuItem.Click += PingToolStripMenuItem_Click;
             // 
             // printersToolStripMenuItem
             // 
@@ -215,7 +215,7 @@
             printersToolStripMenuItem.Name = "printersToolStripMenuItem";
             printersToolStripMenuItem.Size = new Size(202, 22);
             printersToolStripMenuItem.Text = "Printers";
-            printersToolStripMenuItem.Click += printersToolStripMenuItem_Click;
+            printersToolStripMenuItem.Click += PrintersToolStripMenuItem_Click;
             // 
             // localAdminToolStripMenuItem
             // 
@@ -223,7 +223,7 @@
             localAdminToolStripMenuItem.Name = "localAdminToolStripMenuItem";
             localAdminToolStripMenuItem.Size = new Size(202, 22);
             localAdminToolStripMenuItem.Text = "Local admin";
-            localAdminToolStripMenuItem.Click += localAdminToolStripMenuItem_Click;
+            localAdminToolStripMenuItem.Click += LocalAdminToolStripMenuItem_Click;
             // 
             // sentMessageToolStripMenuItem
             // 
@@ -231,18 +231,7 @@
             sentMessageToolStripMenuItem.Name = "sentMessageToolStripMenuItem";
             sentMessageToolStripMenuItem.Size = new Size(202, 22);
             sentMessageToolStripMenuItem.Text = "Send message";
-            sentMessageToolStripMenuItem.Click += sentMessageToolStripMenuItem_Click;
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.DropDown = contextMenuStrip1;
-            toolStripButton3.Image = Properties.Resources.computer_77914;
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(66, 56);
-            toolStripButton3.Text = "Modes";
-            toolStripButton3.ToolTipText = "Modes";
+            sentMessageToolStripMenuItem.Click += SentMessageToolStripMenuItem_Click;
             // 
             // imageList1
             // 
@@ -255,11 +244,22 @@
             imageList1.Images.SetKeyName(3, "like-icon_31852.png");
             imageList1.Images.SetKeyName(4, "dislike-icon_31856.png");
             // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton3.DropDown = contextMenuStrip1;
+            toolStripButton3.Image = Properties.Resources.computer_77914;
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(66, 56);
+            toolStripButton3.Text = "Modes";
+            toolStripButton3.ToolTipText = "Modes";
+            // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.White;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, toolStripButton2, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSeparator4, toolStripButton3, excelExportButton, toolStripButton5, toolStripButton6, toolStripButton4, toolStripSeparator3, runScanerButton });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1145, 59);
@@ -271,18 +271,18 @@
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 59);
             // 
-            // toolStripButton2
+            // excelExportButton
             // 
-            toolStripButton2.AutoSize = false;
-            toolStripButton2.BackColor = Color.Transparent;
-            toolStripButton2.BackgroundImageLayout = ImageLayout.Zoom;
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = Properties.Resources.microsoft_excel_alt_macos_bigsur_icon_189979;
-            toolStripButton2.ImageTransparentColor = Color.Transparent;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(56, 56);
-            toolStripButton2.Text = "Excel";
-            toolStripButton2.Click += toolStripButton2_Click;
+            excelExportButton.AutoSize = false;
+            excelExportButton.BackColor = Color.Transparent;
+            excelExportButton.BackgroundImageLayout = ImageLayout.Zoom;
+            excelExportButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            excelExportButton.Image = Properties.Resources.microsoft_excel_alt_macos_bigsur_icon_189979;
+            excelExportButton.ImageTransparentColor = Color.Transparent;
+            excelExportButton.Name = "excelExportButton";
+            excelExportButton.Size = new Size(56, 56);
+            excelExportButton.Text = "Excel";
+            excelExportButton.Click += toolStripButton2_Click;
             // 
             // toolStripButton5
             // 
@@ -316,15 +316,15 @@
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new Size(6, 59);
             // 
-            // toolStripButton1
+            // runScanerButton
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = Properties.Resources.iconfinder_technologymachineelectronicdevice39_4026421_113339;
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(54, 56);
-            toolStripButton1.Text = "Scan computers";
-            toolStripButton1.Click += ScanButton1_Click;
+            runScanerButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            runScanerButton.Image = Properties.Resources.iconfinder_technologymachineelectronicdevice39_4026421_113339;
+            runScanerButton.ImageTransparentColor = Color.Magenta;
+            runScanerButton.Name = "runScanerButton";
+            runScanerButton.Size = new Size(54, 56);
+            runScanerButton.Text = "Scan computers";
+            runScanerButton.Click += ScanButton1_Click;
             // 
             // richTextBox1
             // 
@@ -355,7 +355,7 @@
             treeView1.SelectedImageIndex = 0;
             treeView1.Size = new Size(201, 517);
             treeView1.TabIndex = 4;
-            treeView1.AfterSelect += treeView1_AfterSelect;
+            treeView1.AfterSelect += TreeViewAD_AfterSelect;
             // 
             // label2
             // 
@@ -378,7 +378,7 @@
             Controls.Add(treeView1);
             Controls.Add(label1);
             Controls.Add(richTextBox1);
-            Controls.Add(listView1);
+            Controls.Add(listViewAD);
             Controls.Add(toolStrip1);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -393,10 +393,10 @@
         #endregion
         private ToolStrip toolStrip1;
         private ColumnHeader ColumnHeader;
-        public ListView listView1;
+        public ListView listViewAD;
         private RichTextBox richTextBox1;
         private Label label1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton excelExportButton;
         private TreeView treeView1;
         private ImageList imageList1;
         private ToolStripSeparator toolStripSeparator4;
@@ -422,7 +422,7 @@
         private ToolStripMenuItem localAdminToolStripMenuItem;
         private ToolStripMenuItem sentMessageToolStripMenuItem;
         private ToolStripMenuItem whoOnlineToolStripMenuItem;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton runScanerButton;
         public ContextMenuStrip contextMenuStrip1;
         private ToolStripButton toolStripButton5;
         private ToolStripButton toolStripButton6;

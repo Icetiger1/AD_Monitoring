@@ -15,8 +15,11 @@ namespace AD_Monitoring.Infrastructure
             int a = listview.Items.Count;
             int b = listview.Columns.Count;
 
-            Microsoft.Office.Interop.Excel.Application app = new();
-            app.Visible = false;
+            Microsoft.Office.Interop.Excel.Application app = new()
+            {
+                Visible = false
+            };
+
             Workbook wb = app.Workbooks.Add(1);
             Worksheet ws = (Worksheet)wb.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range range = null;

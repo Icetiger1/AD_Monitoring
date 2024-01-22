@@ -12,7 +12,7 @@ namespace AD_Monitoring
         public Form1()
         {
             InitializeComponent();
-            this.listView1.ColumnClick += new ColumnClickEventHandler(this.listView1_ColumnClick);
+            this.listViewAD.ColumnClick += new ColumnClickEventHandler(this.ListViewAD_ColumnClick);
             label2.Text = "";
             try
             {
@@ -40,28 +40,28 @@ namespace AD_Monitoring
         }
 
         //sorting listView1
-        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void ListViewAD_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
-            listView1.Sort();
+            this.listViewAD.ListViewItemSorter = new ListViewItemComparer(e.Column);
+            listViewAD.Sort();
         }
 
-        private void listView2_delete_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void listView1_delete_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             //fake method
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeViewAD_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (treeView1.SelectedNode.Nodes.Count == 0)
             {
-                listView1.Items.Clear();
+                listViewAD.Items.Clear();
 
                 string domain = aDRepository.GetLDAPTreeNodes(treeView1);
                 try
                 {
-                    aDRepository.GetComputers(listView1);
-                    label2.Text = "Objects count: " + listView1.Items.Count;
+                    aDRepository.GetComputers(listViewAD);
+                    label2.Text = "Objects count: " + listViewAD.Items.Count;
                 }
                 catch (Exception ex)
                 {
@@ -74,13 +74,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void discCToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DiscCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -100,13 +100,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void remoteControlToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoteControlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -126,13 +126,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void computerManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ComputerManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         modesReposetory.Compmgmt(comp_name);
@@ -145,16 +145,16 @@ namespace AD_Monitoring
             }
         }
 
-        private void whoOnlineToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WhoOnlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
                 var scanInfo = new ScanInfo();
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -162,17 +162,17 @@ namespace AD_Monitoring
                             scanInfo.Login = modesReposetory.PSLogin(comp_name);
                             if (scanInfo.Login != null)
                             {
-                                listView1.Items[i].SubItems[6].Text = scanInfo.Login;
+                                listViewAD.Items[i].SubItems[6].Text = scanInfo.Login;
                             }
                             else
                             {
-                                listView1.Items[i].SubItems[6].Text = "Нет данных";
+                                listViewAD.Items[i].SubItems[6].Text = "Нет данных";
                             }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            listView1.Items[i].SubItems[6].Text = "Нет данных";
+                            listViewAD.Items[i].SubItems[6].Text = "Нет данных";
                         }
                     }
                     else
@@ -184,13 +184,13 @@ namespace AD_Monitoring
             Cursor.Current = Cursors.Default;
         }
 
-        private void shareFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShareFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -210,13 +210,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void shutdownToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShutdownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -237,13 +237,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void rebootToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RebootToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -264,13 +264,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void pingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -278,14 +278,14 @@ namespace AD_Monitoring
                             string ip = modesReposetory.Ping(comp_name);
                             if (ip != null)
                             {
-                                listView1.Items[i].SubItems[5].Text = ip;
-                                listView1.Items[i].ImageIndex = 3;
+                                listViewAD.Items[i].SubItems[5].Text = ip;
+                                listViewAD.Items[i].ImageIndex = 3;
                             }
                             else
                             {
 
-                                listView1.Items[i].SubItems[5].Text = " ";
-                                listView1.Items[i].ImageIndex = 4;
+                                listViewAD.Items[i].SubItems[5].Text = " ";
+                                listViewAD.Items[i].ImageIndex = 4;
                             }
                         }
                         catch (Exception ex)
@@ -301,13 +301,13 @@ namespace AD_Monitoring
             }
         }
 
-        private void printersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PrintersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -327,14 +327,14 @@ namespace AD_Monitoring
             }
         }
 
-        private void localAdminToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LocalAdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -355,14 +355,14 @@ namespace AD_Monitoring
             Cursor.Current = Cursors.Default;
         }
 
-        private void sentMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SentMessageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 f2 = new();
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         f2.textBox1.Text = comp_name;
@@ -374,35 +374,35 @@ namespace AD_Monitoring
 
         private void ScanButton1_Click(object sender, EventArgs e)
         {
-            if (listView1.Items != null || listView1.Items.Count != 0)
+            if (listViewAD.Items != null || listViewAD.Items.Count != 0)
             {
                 treeView1.Enabled = false;
-                toolStripButton1.Enabled = false;
+                runScanerButton.Enabled = false;
                 string start = "Начало выполнения сканирования - " + DateTime.Now;
                 richTextBox1.Text += start + Environment.NewLine;
-                listView1.ColumnClick -= listView1_ColumnClick;
-                listView1.ColumnClick += new ColumnClickEventHandler(listView2_delete_ColumnClick);
+                listViewAD.ColumnClick -= ListViewAD_ColumnClick;
+                listViewAD.ColumnClick += new ColumnClickEventHandler(listView1_delete_ColumnClick);
                 Zapolnyaem_ip_login();
             }
         }
         private async void Zapolnyaem_ip_login()
         {
-            int b = listView1.Items.Count;
+            int b = listViewAD.Items.Count;
             var tasks = new List<Task>();
             var tasks2 = new List<Task>();
 
             for (int i = 0; i < b; i++)
             {
-                string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                 tasks.Add(Task.Run(() => AsyncGetIP(comp_name, b)));
             }
             await Task.WhenAll(tasks);
 
             string end = "Конец выполнения сканирования - " + DateTime.Now;
             richTextBox1.Text += end + Environment.NewLine;
-            listView1.ColumnClick -= listView2_delete_ColumnClick;
-            listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
-            toolStripButton1.Enabled = true;
+            listViewAD.ColumnClick -= listView1_delete_ColumnClick;
+            listViewAD.ColumnClick += new ColumnClickEventHandler(ListViewAD_ColumnClick);
+            runScanerButton.Enabled = true;
             treeView1.Enabled = true;
         }
 
@@ -418,18 +418,18 @@ namespace AD_Monitoring
                 {
                     this.Invoke(new Action(() =>
                     {
-                        if (listView1.Items[j].SubItems[0].Text.Contains(cn))
+                        if (listViewAD.Items[j].SubItems[0].Text.Contains(cn))
                         {
-                            listView1.Items[j].ImageIndex = 3;
-                            listView1.RedrawItems(j, j, true);
-                            listView1.Items[j].SubItems[5].Text = result_ip;
+                            listViewAD.Items[j].ImageIndex = 3;
+                            listViewAD.RedrawItems(j, j, true);
+                            listViewAD.Items[j].SubItems[5].Text = result_ip;
                             if (result_user != null)
                             {
-                                listView1.Items[j].SubItems[6].Text = result_user;
+                                listViewAD.Items[j].SubItems[6].Text = result_user;
                             }
                             else
                             {
-                                listView1.Items[j].SubItems[6].Text = " ";
+                                listViewAD.Items[j].SubItems[6].Text = " ";
                             }
                         }
                     }));
@@ -442,12 +442,12 @@ namespace AD_Monitoring
                 {
                     this.Invoke(new Action(() =>
                     {
-                        if (listView1.Items[j].SubItems[0].Text.Contains(cn))
+                        if (listViewAD.Items[j].SubItems[0].Text.Contains(cn))
                         {
                             result_ip = "";
-                            listView1.Items[j].SubItems[5].Text = result_ip;
-                            listView1.Items[j].ImageIndex = 4;
-                            listView1.RedrawItems(j, j, false);
+                            listViewAD.Items[j].SubItems[5].Text = result_ip;
+                            listViewAD.Items[j].ImageIndex = 4;
+                            listViewAD.RedrawItems(j, j, false);
                         }
                     }));
                 }
@@ -456,11 +456,11 @@ namespace AD_Monitoring
 
         private void sCCMConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
+            for (int i = 0; i < listViewAD.Items.Count; i++)
             {
-                if (listView1.Items[i].Selected == true)
+                if (listViewAD.Items[i].Selected == true)
                 {
-                    string comp_name = listView1.Items[i].SubItems[0].Text.ToString();
+                    string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
                         try
@@ -483,12 +483,12 @@ namespace AD_Monitoring
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             //Export to excel information from listView1
-            if (listView1.Items.Count != 0)
+            if (listViewAD.Items.Count != 0)
             {
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    ExportToExcel.Excel(listView1);
+                    ExportToExcel.Excel(listViewAD);
                     Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)

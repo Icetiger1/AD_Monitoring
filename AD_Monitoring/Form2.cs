@@ -20,7 +20,7 @@ namespace AD_Monitoring
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SendMessageButton_Click(object sender, EventArgs e)
         {
             if ((textBox1.Text != null || textBox1.Text != "") && (textBox2.Text != null || textBox2.Text != ""))
             {
@@ -37,7 +37,7 @@ namespace AD_Monitoring
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
