@@ -18,18 +18,21 @@ namespace AD_Monitoring
             {
                 label1.Text = "My domain: " + aDRepository.GetDomain();
                 label1.ForeColor = Color.DarkGreen;
+                List<TreeAD> treeADs = new List<TreeAD>();
+                aDRepository.ADDTree(treeADs, treeView1);
+                //TreeAD trees = aDRepository.GetFullTreeAD();
 
-                TreeAD trees = aDRepository.GetFullTreeAD();
-
-                foreach (TreeAD tree in trees)
-                {
-                    treeView1.Nodes.Add(tree.GetName());
-
-                    foreach (TreeAD treechild in tree.GetChildren())
-                    {
-                        treeView1.Nodes[tree.GetName()].Nodes.Add(treechild.GetName());
-                    }
-                }
+                //foreach (TreeAD tree in trees)
+                //{
+                //    treeView1.Nodes.Add(tree.GetName());
+                //    if (tree.GetChildren().Count != 0)
+                //    {
+                //        foreach (TreeAD treechild in tree.GetChildren())
+                //        {
+                //            treeView1.Nodes[tree.GetName()].Nodes.Add(treechild.GetName());
+                //        }
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -487,7 +490,7 @@ namespace AD_Monitoring
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    ExportToExcel.Excel(listViewAD);
+                    ExportToExcel.WriteExcelFile(listViewAD);
                     Cursor.Current = Cursors.Default;
                 }
                 catch (Exception ex)

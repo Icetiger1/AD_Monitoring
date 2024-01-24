@@ -181,5 +181,71 @@ namespace AD_Monitoring.Repository
         {
             this.Entry.Dispose();
         }
+
+        public void ADDTree(List<TreeAD> TreeADs, TreeView tv)
+        {
+            try
+            {
+                DirectorySearcher searcher = null;
+                SearchResultCollection res = null;
+                DirectorySearcher mySearcher = new DirectorySearcher(this.Entry);
+                mySearcher.SearchRoot = this.Entry;
+                searcher = new DirectorySearcher(mySearcher.SearchRoot, "(objectClass=organizationalunit)", null, SearchScope.OneLevel);
+                res = searcher.FindAll();
+                foreach (SearchResult r in res)
+                {
+                    DirectoryEntry ent = r.GetDirectoryEntry();
+                    string cn = ent.Name.Remove(0, 3);
+                    TreeAD ad = new(ent.Name, ent.Path);
+                    TreeADs.Add(ad);
+                    tv.Nodes.Add(cn, cn);
+                    DirectorySearcher searcher1 = null;
+                    SearchResultCollection res1 = null;
+                    DirectorySearcher mySearcher1 = new DirectorySearcher(ent);
+                    mySearcher1.SearchRoot = ent;
+                    searcher1 = new DirectorySearcher(mySearcher1.SearchRoot, "(objectClass=organizationalunit)", null, SearchScope.OneLevel);
+                    res1 = searcher1.FindAll();
+                    foreach (SearchResult r1 in res1)
+                    {
+                        DirectoryEntry ent1 = r1.GetDirectoryEntry();
+                        string cn1 = ent1.Name.Remove(0, 3);
+                        TreeAD ad1 = new(ent1.Name, ent1.Path);
+                        TreeADs.Add(ad1);
+                        tv.Nodes[cn].Nodes.Add(cn1, cn1);
+
+                        DirectorySearcher searcher2 = null;
+                        SearchResultCollection res2 = null;
+                        DirectorySearcher mySearcher2 = new DirectorySearcher(ent1);
+                        mySearcher2.SearchRoot = ent1;
+                        searcher2 = new DirectorySearcher(mySearcher2.SearchRoot, "(objectClass=organizationalunit)", null, SearchScope.OneLevel);
+                        res2 = searcher2.FindAll();
+                        foreach (SearchResult r2 in res2)
+                        {
+                            DirectoryEntry ent2 = r2.GetDirectoryEntry();
+                            string cn2 = ent2.Name.Remove(0, 3);
+                            TreeAD ad2 = new(ent2.Name, ent2.Path);
+
+                            TreeADs.Add(ad2);
+                            tv.Nodes[cn].Nodes[cn1].Nodes.Add(cn2, cn2);
+                        }
+                        mySearcher2.Dispose();
+                        searcher2.Dispose();
+                        ent1.Dispose();
+
+                    }
+                    mySearcher1.Dispose();
+                    searcher1.Dispose();
+                    ent.Dispose();
+                }
+                mySearcher.Dispose();
+                searcher.Dispose();
+                this.Entry.Dispose();
+            }
+            finally
+            {
+
+            }
+        }
+
     }
 }
