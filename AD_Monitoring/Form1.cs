@@ -7,7 +7,7 @@ namespace AD_Monitoring
     public partial class Form1 : Form
     {
         private static ADRepository aDRepository = new();
-        private static ModesReposetory modesReposetory = new();
+        private static ModesRepository modesRepository = new();
 
         public Form1()
         {
@@ -22,17 +22,6 @@ namespace AD_Monitoring
                 aDRepository.ADDTree(treeADs, treeView1);
                 //TreeAD trees = aDRepository.GetFullTreeAD();
 
-                //foreach (TreeAD tree in trees)
-                //{
-                //    treeView1.Nodes.Add(tree.GetName());
-                //    if (tree.GetChildren().Count != 0)
-                //    {
-                //        foreach (TreeAD treechild in tree.GetChildren())
-                //        {
-                //            treeView1.Nodes[tree.GetName()].Nodes.Add(treechild.GetName());
-                //        }
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -87,7 +76,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.Open_disk(comp_name);
+                            modesRepository.OpenDiskC(comp_name);
                         }
                         catch (Exception ex)
                         {
@@ -113,7 +102,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.Mstsc(comp_name);
+                            modesRepository.Mstsc(comp_name);
                         }
                         catch (Exception ex)
                         {
@@ -137,7 +126,7 @@ namespace AD_Monitoring
                     string comp_name = listViewAD.Items[i].SubItems[0].Text.ToString();
                     if (comp_name != null)
                     {
-                        modesReposetory.Compmgmt(comp_name);
+                        modesRepository.Compmgmt(comp_name);
                     }
                     else
                     {
@@ -161,7 +150,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            scanInfo.Login = modesReposetory.PSLogin(comp_name);
+                            scanInfo.Login = modesRepository.PSLogin(comp_name);
                             if (scanInfo.Login != null)
                             {
                                 listViewAD.Items[i].SubItems[6].Text = scanInfo.Login;
@@ -197,7 +186,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.Share_Folders(comp_name);
+                            modesRepository.ShareFolders(comp_name);
                         }
                         catch (Exception ex)
                         {
@@ -224,7 +213,7 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /s /f /c \"Компьютер будет выключен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            modesReposetory.ShutDown(comp_name, key);
+                            modesRepository.ShutDown(comp_name, key);
                         }
                         catch (Exception ex)
                         {
@@ -251,7 +240,7 @@ namespace AD_Monitoring
                         try
                         {
                             var key = " /r /f /c \"Компьютер будет перезагружен в течении 1 минуты. Во избежании потери данных закройте все открытые файлы и программы.\" /t 60";
-                            modesReposetory.ShutDown(comp_name, key);
+                            modesRepository.ShutDown(comp_name, key);
                         }
                         catch (Exception ex)
                         {
@@ -277,7 +266,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            string ip = modesReposetory.Ping(comp_name);
+                            string ip = modesRepository.Ping(comp_name);
                             if (ip != null)
                             {
                                 listViewAD.Items[i].SubItems[5].Text = ip;
@@ -314,7 +303,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.Printers(comp_name, richTextBox1);
+                            modesRepository.Printers(comp_name, richTextBox1);
                         }
                         catch (Exception ex)
                         {
@@ -341,7 +330,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.LocalAdmin(comp_name, richTextBox1);
+                            modesRepository.LocalAdmin(comp_name, richTextBox1);
                         }
                         catch (Exception ex)
                         {
@@ -412,10 +401,10 @@ namespace AD_Monitoring
         {
             string? result_ip = null;
             string? result_user = null;
-            result_ip = await Task.Run(() => modesReposetory.Ping(cn));
+            result_ip = await Task.Run(() => modesRepository.Ping(cn));
             if (result_ip != null)
             {
-                result_user = await Task.Run(() => modesReposetory.PSLogin(cn));
+                result_user = await Task.Run(() => modesRepository.PSLogin(cn));
                 for (int j = 0; j < count; j++)
                 {
                     this.Invoke(new Action(() =>
@@ -467,7 +456,7 @@ namespace AD_Monitoring
                     {
                         try
                         {
-                            modesReposetory.CmRcViewer(comp_name);
+                            modesRepository.CmRcViewer(comp_name);
                         }
                         catch (Exception ex)
                         {

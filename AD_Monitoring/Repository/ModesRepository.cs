@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AD_Monitoring.Repository
 {
-    public class ModesReposetory
+    public class ModesRepository
     {
         private NewProcess myprocess = new();
 
@@ -33,6 +33,7 @@ namespace AD_Monitoring.Repository
             this.myprocess.Start();
             this.myprocess.Close();
         }
+
         public void CmRcViewer(string cn)
         {
             string path = Application.StartupPath;
@@ -42,7 +43,7 @@ namespace AD_Monitoring.Repository
             this.myprocess.Start();
             this.myprocess.Close();
         }
-        //не работает
+
         public string? PSLogin(string cn)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -76,18 +77,21 @@ namespace AD_Monitoring.Repository
             }
 
         }
-        public void Open_disk(string cn)
+
+        public void OpenDiskC(string cn)
         {
             this.myprocess.SetAguments("explorer.exe", @$"\\{cn}\\c$");
             this.myprocess.Start();
             this.myprocess.Close();
         }
-        public void Share_Folders(string cn)
+
+        public void ShareFolders(string cn)
         {
-            this.myprocess.SetAguments("explorer.exe", @$"\\{cn}\\c$");
+            this.myprocess.SetAguments("explorer.exe", @$"\\{cn}\\");
             this.myprocess.Start();
             this.myprocess.Close();
         }
+
         public void ShutDown(string cn, string key)
         {
             this.myprocess.SetStyle(true, ProcessWindowStyle.Hidden, true);
@@ -95,6 +99,7 @@ namespace AD_Monitoring.Repository
             this.myprocess.Start();
             this.myprocess.Close();
         }
+
         public string Ping(string cn)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -143,6 +148,7 @@ namespace AD_Monitoring.Repository
             }
 
         }
+
         public void Printers(string cn, RichTextBox rich)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -170,6 +176,7 @@ namespace AD_Monitoring.Repository
             }
             Cursor.Current = Cursors.Default;
         }
+
         public void LocalAdmin(string cn, RichTextBox rich)
         {
             using (DirectoryEntry machine = new("WinNT://" + cn))
@@ -208,6 +215,7 @@ namespace AD_Monitoring.Repository
                 }
             }
         }
+
         public void Send_msg(string address, string text)
         {
             string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\System32\";
